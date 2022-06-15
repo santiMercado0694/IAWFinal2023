@@ -6,14 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { fabClasses } from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import accounting from 'accounting';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,49 +24,49 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function Product() {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  //{accounting.formatMoney(price, "$")}
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 350 }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <Typography
+            className={fabClasses.action}
+            variant='h5'
+            color='textSecondary'
+           >
+            {accounting.formatMoney(50)}
+           </Typography>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="Placa de video Nvidia GeForce RTX 30 Series RTX 3090 24GB"
+        subheader="En Stock"
       />
       <CardMedia
         component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
+        height="300"
+        image="https://http2.mlstatic.com/D_NQ_NP_904146-MLA43566866450_092020-O.webp"
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+        Placa de video
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="Add to Cart">
+          <AddShoppingCartIcon fontSize='large'/>
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        {Array(4)
+            .fill()
+            .map((_, i) => (
+               <p>&#11088;</p>
+            ))}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -80,30 +78,23 @@ export default function RecipeReviewCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Descripcion:</Typography>
           <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
+          Nvidia es el fabricante líder de placas de video; su calidad asegura una 
+          experiencia positiva en el desarrollo del motor gráfico
+          de tu computadora. Además, sus procesadores usan tecnología de punta 
+          para que puedas disfrutar de un producto veloz y duradero.
           </Typography>
           <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+          <Typography>Velocidad en cada lectura</Typography>
+          Cuenta con 10496 núcleos, por lo que la interfaz de la placa será algo sorprendente. 
+          Este tipo de estructura es apropiado para el procesamiento de tecnologías más complejas y modernas 
+          caracterizadas por grandes volúmenes de datos.
           </Typography>
           <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
+          <Typography>Calidad de imagen</Typography>
+          Criterio fundamental a la hora de elegir una placa de video, su resolución de 7680x4320 no te defraudará.
+          La decodificación de los píxeles en tu pantalla te harán ver hasta los detalles más ínfimos en cada ilustración.
           </Typography>
         </CardContent>
       </Collapse>
