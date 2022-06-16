@@ -21,7 +21,7 @@ const theme = createTheme();
           </IconButton>
           <Box sx={{flexGrow: 1 }}></Box>
           <Typography variant="h6" color="textPrimary" component="p">
-            Hola Tominaitor
+            Hola Santi
           </Typography>
           <Button variant="outlined" style={{ color: "black"}} sx={{ marginLeft: theme.spacing(2) }}>
             <strong>Iniciar Sesion</strong>
