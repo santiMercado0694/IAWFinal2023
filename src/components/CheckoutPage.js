@@ -2,9 +2,9 @@ import React from "react";
 import { Box } from '@mui/system';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { CheckoutCard } from "./CheckoutCard";
-import Product from './Product';
+import CheckoutCard  from "./CheckoutCard";
 import products from "../product-data";
+
 
 const CheckoutPage = () => {
 
@@ -13,7 +13,7 @@ const CheckoutPage = () => {
             <React.Fragment>
              {products.map((item) => (
               <Grid item xs={12} sm={8} md={6} lg={4}>
-                 <Product key={item.id} product={item} />
+                 <CheckoutCard key={item.id} product={item} />
               </Grid>
              ))}
             </React.Fragment> 
