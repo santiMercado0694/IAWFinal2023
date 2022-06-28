@@ -24,7 +24,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Product() {
+export default function Product({product : {id, name, details, description, price, stock, rating, category_id, image_path }}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -41,28 +41,28 @@ export default function Product() {
             variant='h5'
             color='textSecondary'
            >
-            {accounting.formatMoney(50)}
+            {accounting.formatMoney(price)}
            </Typography>
         }
-        title="Placa de video Nvidia GeForce RTX 30 Series RTX 3090 24GB"
+        title= {name}
         subheader="En Stock"
       />
       <CardMedia
         component="img"
         height="300"
-        image="https://http2.mlstatic.com/D_NQ_NP_904146-MLA43566866450_092020-O.webp"
-        alt="Paella dish"
+        image={image_path}
+        alt="imagen"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-        Placa de video
+        {details}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="Add to Cart">
           <AddShoppingCartIcon fontSize='large'/>
         </IconButton>
-        {Array(4)
+        {Array(rating)
             .fill()
             .map((_, i) => (
                <p>&#11088;</p>
@@ -80,21 +80,7 @@ export default function Product() {
         <CardContent>
           <Typography paragraph>Descripcion:</Typography>
           <Typography paragraph>
-          Nvidia es el fabricante líder de placas de video; su calidad asegura una 
-          experiencia positiva en el desarrollo del motor gráfico
-          de tu computadora. Además, sus procesadores usan tecnología de punta 
-          para que puedas disfrutar de un producto veloz y duradero.
-          </Typography>
-          <Typography paragraph>
-          <Typography>Velocidad en cada lectura</Typography>
-          Cuenta con 10496 núcleos, por lo que la interfaz de la placa será algo sorprendente. 
-          Este tipo de estructura es apropiado para el procesamiento de tecnologías más complejas y modernas 
-          caracterizadas por grandes volúmenes de datos.
-          </Typography>
-          <Typography paragraph>
-          <Typography>Calidad de imagen</Typography>
-          Criterio fundamental a la hora de elegir una placa de video, su resolución de 7680x4320 no te defraudará.
-          La decodificación de los píxeles en tu pantalla te harán ver hasta los detalles más ínfimos en cada ilustración.
+          {description}
           </Typography>
         </CardContent>
       </Collapse>
