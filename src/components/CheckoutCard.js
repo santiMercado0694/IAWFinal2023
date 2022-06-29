@@ -11,13 +11,7 @@ import { fabClasses } from '@mui/material';
 import accounting from 'accounting';
 
 export default function CheckoutCard({product : {id, name, price, stock, rating, image_path }}) {
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  //{accounting.formatMoney(price, "$")}
   return (
     <Card sx={{ maxWidth: 350 }}>
       <CardHeader
@@ -31,7 +25,7 @@ export default function CheckoutCard({product : {id, name, price, stock, rating,
            </Typography>
         }
         title= {name}
-        subheader="En Stock"
+        subheader={"Stock disponible: "+stock}
       />
 
         <CardMedia 
