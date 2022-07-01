@@ -18,8 +18,8 @@ const CheckoutPage = () => {
       // Fetch
       
       const getDataFromAPI = async() => {
-        const URL_CART = "https://serviciowebecommerce.herokuapp.com/cart";
-          //const URL_productos = process.env.REACT_APP_API_URL+"/products";
+        //const URL_CART = "https://serviciowebecommerce.herokuapp.com/cart";
+          const URL_CART = process.env.REACT_APP_API_URL+"/cart";
           const response_cart = await fetch(URL_CART);
           const dataCart = await response_cart.json();
           setCart(dataCart);
@@ -27,7 +27,8 @@ const CheckoutPage = () => {
       }
 
       const deleteProductCart = async (id) => {
-        const URL_DELETE_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/cart/delete/"+id;
+        const URL_DELETE_PRODUCTO = process.env.REACT_APP_API_URL+"/cart/delete/"+id;
+        //const URL_DELETE_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/cart/delete/"+id;
         await fetch(URL_DELETE_PRODUCTO, { method: 'DELETE' });
         await getDataFromAPI();
       }

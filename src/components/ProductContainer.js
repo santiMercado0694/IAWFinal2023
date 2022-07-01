@@ -15,8 +15,8 @@ const theme = createTheme();
  // Fetch
  
  const getDataFromAPI = async() => {
-   const URL_productos = "https://serviciowebecommerce.herokuapp.com/products";
-     //const URL_productos = process.env.REACT_APP_API_URL+"/products";
+   //const URL_productos = "https://serviciowebecommerce.herokuapp.com/products";
+     const URL_productos = process.env.REACT_APP_API_URL+"/products";
      const response_productos = await fetch(URL_productos);
      const dataProductos = await response_productos.json();
      setProductos(dataProductos);
@@ -33,8 +33,8 @@ const theme = createTheme();
     image_path: image_path,
     rating: rating
   }
-  const URL_POST_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/products";
-    //const URL_productos = process.env.REACT_APP_API_URL+"/products";
+  //const URL_POST_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/products";
+const URL_POST_PRODUCTO = process.env.REACT_APP_API_URL+"/products";
     const response_cart = await fetch(URL_POST_PRODUCTO, {
       method: 'POST',
       headers:{
