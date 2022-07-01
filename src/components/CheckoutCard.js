@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { Box } from '@mui/system';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -9,8 +9,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { fabClasses } from '@mui/material';
 import accounting from 'accounting';
+import { Link } from "react-router-dom";
 
-export default function CheckoutCard({product : {id, name, price, stock, rating, image_path }}) {
+export default function CheckoutCard({product : {id, name, price, stock, quantity, image_path, rating, }, deleteProductCart}) {
 
   return (
     <Card sx={{ maxWidth: 350 }}>
@@ -29,10 +30,9 @@ export default function CheckoutCard({product : {id, name, price, stock, rating,
       />
 
         <CardMedia 
-        height= "200" 
-        paddingTop= "56.25%" 
-        component= "img"
-        image= {image_path}
+        component="img"
+        height="350"
+        image={image_path}
         alt="imagen" 
         />
     
@@ -45,9 +45,11 @@ export default function CheckoutCard({product : {id, name, price, stock, rating,
             ))
         }
        </Box>
-        <IconButton> 
+       <Link to="/cart">
+        <IconButton onClick={(event) => deleteProductCart(id)} > 
             <DeleteIcon fontSize="large"/>
         </IconButton>
+      </Link>
         
       </CardActions>
 

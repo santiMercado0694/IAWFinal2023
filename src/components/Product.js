@@ -12,6 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { fabClasses } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
+import { Link } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -24,14 +25,39 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Product({product : {id, name, details, description, price, stock, rating, category_id, image_path }}) {
+
+
+export default function Product({product : {id, name, details, description, price, stock, category_id, image_path, rating }}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  //{accounting.formatMoney(price, "$")}
+  const addProductCart= async() => {
+    const data = {
+      id: id,
+      name: name,
+      price: price,
+      stock: stock,
+      quantity: 1,
+      image_path: image_path,
+      rating: rating
+    }
+    const URL_POST_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/products";
+      //const URL_productos = process.env.REACT_APP_API_URL+"/products";
+      const response_cart = await fetch(URL_POST_PRODUCTO, {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => response_cart.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
+  
+  }
+
   return (
     <Card sx={{ maxWidth: 350 }}>
       <CardHeader
@@ -45,11 +71,11 @@ export default function Product({product : {id, name, details, description, pric
            </Typography>
         }
         title= {name}
-        subheader="En Stock"
+        subheader={"Stock disponible: "+stock}
       />
       <CardMedia
         component="img"
-        height="300"
+        height="350"
         image={image_path}
         alt="imagen"
       />
@@ -59,13 +85,15 @@ export default function Product({product : {id, name, details, description, pric
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to Cart">
+      <Link to="/cart">
+        <IconButton aria-label="Add to Cart" onClick={addProductCart}>
           <AddShoppingCartIcon fontSize='large'/>
         </IconButton>
+       </Link> 
         {Array(rating)
             .fill()
             .map((_, i) => (
-               <p>&#11088;</p>
+               <p key={i}>&#11088;</p>
             ))}
         <ExpandMore
           expand={expanded}
