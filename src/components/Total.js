@@ -10,8 +10,6 @@ const total = cart.reduce((acc, item) => {
     const itemPrice = new Decimal(item.price);
     return acc.plus(itemPrice.times(item.quantity)); 
 }, new Decimal(0)); 
-
-const compra = cart;
  
 if(cart.length > 0) {
     return (
