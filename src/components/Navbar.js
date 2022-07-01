@@ -27,9 +27,11 @@ const theme = createTheme();
           <Typography variant="h6" color="textPrimary" component="p">
             Hola Santi
           </Typography>
-          <Button variant="outlined" style={{ color: "black"}} sx={{ marginLeft: theme.spacing(2) }}>
-            <strong>Iniciar Sesion</strong>
-          </Button>
+          <Link to="/signin">
+            <Button variant="outlined" style={{ color: "black"}} sx={{ marginLeft: theme.spacing(2) }}>
+              <strong>Iniciar Sesion</strong>
+            </Button>
+          </Link>
           <Link to="/cart">
           <IconButton aria-label='show cart items' color='inherit'>
             <Badge color="error">
