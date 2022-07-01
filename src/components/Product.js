@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -27,36 +27,12 @@ const ExpandMore = styled((props) => {
 
 
 
-export default function Product({product : {id, name, details, description, price, stock, category_id, image_path, rating }}) {
+export default function Product({product : {id, name, details, description, price, stock, category_id, image_path, rating }, addProductCart}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  const addProductCart= async() => {
-    const data = {
-      id: id,
-      name: name,
-      price: price,
-      stock: stock,
-      quantity: 1,
-      image_path: image_path,
-      rating: rating
-    }
-    const URL_POST_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/products";
-      //const URL_productos = process.env.REACT_APP_API_URL+"/products";
-      const response_cart = await fetch(URL_POST_PRODUCTO, {
-        method: 'POST',
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }).then(res => response_cart.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response));
-  
-  }
 
   return (
     <Card sx={{ maxWidth: 350 }}>
@@ -86,7 +62,7 @@ export default function Product({product : {id, name, details, description, pric
       </CardContent>
       <CardActions disableSpacing>
       <Link to="/cart">
-        <IconButton aria-label="Add to Cart" onClick={addProductCart}>
+        <IconButton aria-label="Add to Cart" onClick={(event) => addProductCart(id,name,price,stock,image_path,rating)}>
           <AddShoppingCartIcon fontSize='large'/>
         </IconButton>
        </Link> 

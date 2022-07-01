@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import { Box, createTheme } from '@mui/system';
@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import logo from "../assets/NombreTienda.png";
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
+
 
 export default function Navbar() {
 
