@@ -10,8 +10,10 @@ import Typography from '@mui/material/Typography';
 import { fabClasses } from '@mui/material';
 import accounting from 'accounting';
 import { Link } from "react-router-dom";
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-export default function CheckoutCard({product : {id, name, price, stock, quantity, image_path, rating, }, deleteProductCart}) {
+export default function CheckoutCard({product : {id, name, price, stock, quantity, image_path, rating, }, deleteProductCart, updateProductQuantity}) {
 
   return (
     <Card sx={{ maxWidth: 350 }}>
@@ -26,7 +28,8 @@ export default function CheckoutCard({product : {id, name, price, stock, quantit
            </Typography>
         }
         title= {name}
-        subheader={"Stock disponible: "+stock}
+        subheader={"En stock: \n"+stock+ " Cantidad Seleccionada: "+quantity}
+        
       />
 
         <CardMedia 
@@ -37,6 +40,12 @@ export default function CheckoutCard({product : {id, name, price, stock, quantit
         />
     
       <CardActions sx={{ display: "flex", justifyContent: "space-between", textAlign: "center" }}>
+         <IconButton aria-label="Add to Cart" onClick={(quantity < stock) ? ((event) => updateProductQuantity(id, quantity+1)) : "error"} >
+          <AddCircleIcon fontSize='large'/>
+         </IconButton>
+         <IconButton aria-label="Substract from cart" onClick={(quantity > 1) ? ((event) => updateProductQuantity(id, quantity-1)) : "error"} >
+          <RemoveCircleIcon fontSize='large'/>
+         </IconButton>
        <Box sx={{ display: "flex"}} >
         {Array(rating)
             .fill()

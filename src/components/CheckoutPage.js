@@ -26,6 +26,26 @@ const CheckoutPage = () => {
   
       }
 
+      const updateProductQuantity= async(id, quantity) => {
+        const data = {
+          id: id,
+          quantity: quantity
+        }
+        //const URL_POST_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/products";
+          const URL_PUT_CANTIDAD = process.env.REACT_APP_API_URL+"/cart/update/";
+          const response_cart = await fetch(URL_PUT_CANTIDAD, {
+            method: 'PUT',
+            headers:{
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then(res => response_cart.json())
+          .catch(error => console.error('Error:', error))
+          .then(response => console.log('Success:', response));
+          await getDataFromAPI();
+      
+       }  
+
       const deleteProductCart = async (id) => {
         const URL_DELETE_PRODUCTO = process.env.REACT_APP_API_URL+"/cart/delete/"+id;
         //const URL_DELETE_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/cart/delete/"+id;
@@ -42,7 +62,7 @@ const CheckoutPage = () => {
             <React.Fragment>
              {cart.map((item) => (
               <Grid item xs={12} sm={8} md={6} lg={4}>
-                 <CheckoutCard key={item.id} product={item} deleteProductCart={deleteProductCart} />
+                 <CheckoutCard key={item.id} product={item} deleteProductCart={deleteProductCart} updateProductQuantity={updateProductQuantity} />
               </Grid>
              ))}
             </React.Fragment> 

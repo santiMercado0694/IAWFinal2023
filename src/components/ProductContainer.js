@@ -34,7 +34,7 @@ const theme = createTheme();
     rating: rating
   }
   //const URL_POST_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/products";
-const URL_POST_PRODUCTO = process.env.REACT_APP_API_URL+"/products";
+    const URL_POST_PRODUCTO = process.env.REACT_APP_API_URL+"/products";
     const response_cart = await fetch(URL_POST_PRODUCTO, {
       method: 'POST',
       headers:{
@@ -45,7 +45,7 @@ const URL_POST_PRODUCTO = process.env.REACT_APP_API_URL+"/products";
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', response));
 
-}
+ }
 
  useEffect( () => {
      getDataFromAPI();
