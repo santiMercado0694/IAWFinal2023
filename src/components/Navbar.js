@@ -12,10 +12,12 @@ import { useStateValue} from "../StateProvider"
 import { auth } from "../firebase";
 import {useHistory} from "react-router-dom";
 import { actionTypes} from "../reducer";
+import { useGlobalContext } from '../storeContext'
 
 export default function Navbar() {
 
   const [{user}, dispatch] = useStateValue();
+  const {cart} = useGlobalContext();
   const history = useHistory();
 
   const handleAuth = () => {
@@ -47,7 +49,7 @@ const theme = createTheme();
           </Link>
           <Link to="/cart">
           <IconButton aria-label='show cart items' color='inherit'>
-            <Badge color="error">
+            <Badge badgeContent={cart.reduce((acc, item) => acc + item.quantity, 0) } color="error">
                 <ShoppingCart fontSize='large' color="primary"/>
             </Badge>
           </IconButton>
