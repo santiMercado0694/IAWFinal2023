@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import ProductContainer from "./components/ProductContainer";
 import CheckoutPage from "./components/CheckoutPage";
 import Signin from "./components/Signin";
@@ -36,6 +37,7 @@ useEffect(() => {
                      <Route path="/signin" component={Signin} />
                      <Route path="/signup" component={Signup} />                                    
                </Switch>
+      <Footer/>
       </div>
      </Router>
   );

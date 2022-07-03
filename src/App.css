@@ -1,3 +1,7 @@
+.App{
+      background-color: rgb(245, 238, 238);
+}
+
 .divPadre{
       height: 100vh;
       position: relative;
@@ -45,3 +49,9 @@
 }
     
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.Carousel{
+           object-fit: cover;
+           object-position: center;
+           overflow: hidden;
+}

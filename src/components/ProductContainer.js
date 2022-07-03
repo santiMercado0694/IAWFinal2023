@@ -5,6 +5,7 @@ import Product from './Product';
 import { useGlobalContext } from '../storeContext'
 import Loading from './Loading'
 import Pagination from "./Pagination";
+import Carousel from "./Slider";
 
 export default function ProductContainer() {
   
@@ -29,6 +30,7 @@ const theme = createTheme();
 
   return (
    <Box>
+    <Carousel/>
     <Box sx={{ flexGrow: 1 , padding: theme.spacing(2)}}>
       <Grid container spacing={2}>
           {
