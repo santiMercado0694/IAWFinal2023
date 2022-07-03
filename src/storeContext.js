@@ -3,9 +3,10 @@ import React, { useState, useContext, useEffect } from 'react'
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
-  const [productos, setProductos] = useState([])
-  const [cart, setCart] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [productos, setProductos] = useState([]);
+  const [cart, setCart] = useState([]);
+
 
   const getProductsFromAPI = async() => {
       setLoading(true)
@@ -82,13 +83,13 @@ const AppProvider = ({ children }) => {
             getCartFromAPI();
         }, []);
 
+
+
   return <AppContext.Provider value={{
     loading,
     productos,
     cart,
-    getProductsFromAPI,
     addProductCart,
-    getCartFromAPI,
     updateProductQuantity,
     deleteProductCart,
   }}>{children}</AppContext.Provider>
