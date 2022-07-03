@@ -17,16 +17,17 @@ import { useGlobalContext } from '../storeContext'
 export default function Navbar() {
 
   const [{user}, dispatch] = useStateValue();
-  const {cart} = useGlobalContext();
+  const {cart, deleteCart} = useGlobalContext();
   const history = useHistory();
 
-  const handleAuth = () => {
+  const handleAuth = (e) => {
     if (user) {
       auth.signOut();
       dispatch({
         type : actionTypes.SET_USER,
         user : null,
       })
+      deleteCart()
       history.push("/");
     }
   }
@@ -43,7 +44,7 @@ const theme = createTheme();
           </Link>
           <Box sx={{flexGrow: 1 }}></Box>
           <Link to="/signin">
-            <Button variant="outlined" onClick = {handleAuth} style={{ color: "black"}} sx={{ marginLeft: theme.spacing(2) }}>
+            <Button variant="outlined" onClick = {(e) => handleAuth(e)} style={{ color: "black"}} sx={{ marginLeft: theme.spacing(2) }}>
               <strong>{user ? "Cerrar sesion" : "Iniciar sesion" }</strong>
             </Button>
           </Link>

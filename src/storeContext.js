@@ -77,6 +77,12 @@ const AppProvider = ({ children }) => {
           await fetch(URL_DELETE_PRODUCTO, { method: 'DELETE' });
           await getCartFromAPI();
         }
+
+        const deleteCart = async () => {
+          const URL_DELETE_PRODUCTO = process.env.REACT_APP_API_URL+"/cart/delete/";
+          await fetch(URL_DELETE_PRODUCTO, { method: 'DELETE' });
+          await getCartFromAPI();
+        }
     
         useEffect( () => {
             getProductsFromAPI();
@@ -91,6 +97,7 @@ const AppProvider = ({ children }) => {
     cart,
     addProductCart,
     updateProductQuantity,
+    deleteCart,
     deleteProductCart,
   }}>{children}</AppContext.Provider>
 }

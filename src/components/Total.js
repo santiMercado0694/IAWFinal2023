@@ -6,8 +6,6 @@ import Decimal from "decimal.js";
 import { useStateValue} from "../StateProvider"
 import { Link } from "react-router-dom";
 
-
-
 const Total = ({cart}) => {
 
 const [{user}] = useStateValue();

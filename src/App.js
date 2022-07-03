@@ -30,7 +30,7 @@ useEffect(() => {
      <Router>
       <div className="App">
        <Navbar />
-               <Switch>   
+               <Switch>
                      <Route exact path="/" component={ProductContainer} />         
                      <Route path="/cart" component={CheckoutPage} /> 
                      <Route path="/signin" component={Signin} />

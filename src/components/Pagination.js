@@ -1,6 +1,5 @@
 import React from "react";
 import '../App.css';
-import { Box } from '@mui/system';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate}) => {
     const pageNumbers = [];

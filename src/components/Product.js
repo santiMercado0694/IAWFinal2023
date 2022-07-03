@@ -13,6 +13,7 @@ import { fabClasses } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
 import { Link } from "react-router-dom";
+import { useStateValue} from "../StateProvider"
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -29,6 +30,8 @@ const ExpandMore = styled((props) => {
 
 export default function Product({product : {id, name, details, description, price, stock, category_id, image_path, rating }, addProductCart}) {
   const [expanded, setExpanded] = React.useState(false);
+
+  const [{user}] = useStateValue();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -61,8 +64,8 @@ export default function Product({product : {id, name, details, description, pric
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-      <Link to="/cart">
-        <IconButton aria-label="Add to Cart" onClick={(event) => addProductCart(id,name,price,stock,image_path,rating)}>
+      <Link to={user ? "/cart" : "/signin"}>
+        <IconButton aria-label="Add to Cart" onClick={user ? (event) => addProductCart(id,name,price,stock,image_path,rating) : "error"}>
           <AddShoppingCartIcon fontSize='large'/>
         </IconButton>
        </Link> 
