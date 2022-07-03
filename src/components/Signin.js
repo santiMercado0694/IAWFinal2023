@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -121,11 +120,6 @@ export default function SignInSide() {
                 Iniciar sesion
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Olvido su contraseña?
-                  </Link>
-                </Grid>
                 <Grid item>
                   <RouteLink to="/signup" >
                     {"Todavia no tiene una cuenta? Registrese"}
