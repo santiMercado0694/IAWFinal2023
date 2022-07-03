@@ -8,6 +8,7 @@ import Total from "./Total";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from '../storeContext'
 import Loading from './Loading'
+import CarouselCart from "./SliderCart";
 
 const CheckoutPage = () => {
 
@@ -33,6 +34,8 @@ const CheckoutPage = () => {
 
   if(cart.length > 0){ 
     return (
+       <Box>
+        <CarouselCart />
         <Box sx={{ flexGrow: 1 , padding: "2rem"}}>
          <Grid container spacing={3}>
             <Grid item xs={12}>           
@@ -51,10 +54,13 @@ const CheckoutPage = () => {
             </Grid>
          </Grid>
         </Box>
+       </Box>
     );
   }
   else{
     return (
+      <Box>
+      <CarouselCart />
       <Box sx={{ flexGrow: 1 , padding: "2rem"}}>
        <Grid container spacing={2}>
           <Grid item xs={12}>           
@@ -68,6 +74,7 @@ const CheckoutPage = () => {
              </Link>
           </Grid> 
        </Grid>
+      </Box>
       </Box>
    );
   }
