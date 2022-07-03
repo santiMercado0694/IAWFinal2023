@@ -28,9 +28,11 @@ export default function CheckoutCard({product : {id, name, price, stock, quantit
            </Typography>
         }
         title= {name}
-        subheader={"En stock: \n"+stock+ " Cantidad Seleccionada: "+quantity}
+        subheader={"En stock: "+stock}
+        
         
       />
+       <Typography variant="h7" color='textSecondary'> {"Cantidad Seleccionada: "+quantity}</Typography>
 
         <CardMedia 
         component="img"

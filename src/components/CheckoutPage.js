@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from '@mui/system';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -6,56 +6,18 @@ import CheckoutCard  from "./CheckoutCard";
 import Button from '@mui/material/Button';
 import Total from "./Total";
 import { Link } from "react-router-dom";
-
-
+import { useGlobalContext } from '../storeContext'
+import Loading from './Loading'
 
 const CheckoutPage = () => {
 
       // Hooks
 
-      const [cart, setCart] = useState([]);
+    const {cart, loading, deleteProductCart, updateProductQuantity} = useGlobalContext();
 
-      // Fetch
-      
-      const getDataFromAPI = async() => {
-        //const URL_CART = "https://serviciowebecommerce.herokuapp.com/cart";
-          const URL_CART = process.env.REACT_APP_API_URL+"/cart";
-          const response_cart = await fetch(URL_CART);
-          const dataCart = await response_cart.json();
-          setCart(dataCart);
-  
-      }
-
-      const updateProductQuantity= async(id, quantity) => {
-        const data = {
-          id: id,
-          quantity: quantity
-        }
-        //const URL_POST_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/products";
-          const URL_PUT_CANTIDAD = process.env.REACT_APP_API_URL+"/cart/update/";
-          const response_cart = await fetch(URL_PUT_CANTIDAD, {
-            method: 'PUT',
-            headers:{
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          }).then(res => response_cart.json())
-          .catch(error => console.error('Error:', error))
-          .then(response => console.log('Success:', response));
-          await getDataFromAPI();
-      
-       }  
-
-      const deleteProductCart = async (id) => {
-        const URL_DELETE_PRODUCTO = process.env.REACT_APP_API_URL+"/cart/delete/"+id;
-        //const URL_DELETE_PRODUCTO = "https://serviciowebecommerce.herokuapp.com/cart/delete/"+id;
-        await fetch(URL_DELETE_PRODUCTO, { method: 'DELETE' });
-        await getDataFromAPI();
-      }
-  
-      useEffect( () => {
-          getDataFromAPI();
-      }, []);
+    if (loading) {
+      return <Loading />
+    }
 
     function FormRow(){
       return (
