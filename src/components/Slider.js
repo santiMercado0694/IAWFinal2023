@@ -1,6 +1,8 @@
 import React from 'react';
 import '../App.css';
 import { Carousel} from 'react-bootstrap';
+import gamer1 from "../assets/Gamer1.png"
+import gamer2 from "../assets/gamer2.png"
 
 const CarouselContainer = () => {
     return (
@@ -9,14 +11,14 @@ const CarouselContainer = () => {
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src="https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1636982341171-home-sliderdesktop2x.jpg"
+                            src={gamer1}
                             alt="First slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src="https://http2.mlstatic.com/D_NQ_917752-MLA50446386694_062022-OO.webp"
+                            src={gamer2}
                             alt="Second slide"
                         />
                     </Carousel.Item>
