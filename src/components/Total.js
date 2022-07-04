@@ -20,7 +20,7 @@ if(cart.length > 0) {
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "20vh" }}>
             <h5>Total item: {cart.reduce((acc, item) => acc + item.quantity, 0) }</h5>
             <h5> {accounting.formatMoney(total.toFixed(2))}</h5>
-            <Link to={user ? "/" : "/signin"}>
+            <Link to={user ? "/Checkout" : "/signin"}>
                 <Button marginTop= "2rem" variant="contained" color="primary"> Comprar </Button> 
             </Link>
                 <Box>

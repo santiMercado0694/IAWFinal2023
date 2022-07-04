@@ -7,6 +7,7 @@ import ProductContainer from "./components/ProductContainer";
 import CheckoutPage from "./components/CheckoutPage";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import Checkout from "./components/Checkout";
 import { auth } from "./firebase";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"
@@ -35,7 +36,8 @@ useEffect(() => {
                      <Route exact path="/" component={ProductContainer} />         
                      <Route path="/cart" component={CheckoutPage} /> 
                      <Route path="/signin" component={Signin} />
-                     <Route path="/signup" component={Signup} />                                    
+                     <Route path="/signup" component={Signup} />
+                     <Route path="/Checkout" component={Checkout} />                                   
                </Switch>
       <Footer/>
       </div>
