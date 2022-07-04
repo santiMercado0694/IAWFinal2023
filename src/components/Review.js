@@ -6,6 +6,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { useGlobalContext } from '../storeContext'
 import Decimal from "decimal.js";
 import accounting from 'accounting';
+import Box from '@mui/material/Box';
+import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 export default function Review() {
 
@@ -17,24 +20,41 @@ export default function Review() {
 }, new Decimal(0)); 
 
   return (
+
     <React.Fragment>
+
       <Typography variant="h5" gutterBottom>
+
         Resumen de compra
+
       </Typography>
+
       <List disablePadding>
+
         {cart.map((product) => (
+
           <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} />
+
+            <ListItemText primary={product.name} secondary={product.quantity} />
+
           </ListItem>
+
         ))}
 
         <ListItem sx={{ py: 1, px: 0 }}>
+
           <ListItemText primary="Total" />
+
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+
             <h5>{accounting.formatMoney(total.toFixed(2))}</h5>
+
           </Typography>
+
         </ListItem>
-      </List>
+
+       </List>
+
     </React.Fragment>
   );
 }

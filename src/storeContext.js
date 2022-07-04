@@ -70,6 +70,26 @@ const AppProvider = ({ children }) => {
             .then(response => console.log('Success:', response));
             await getCartFromAPI();
         
+         }
+         
+         const updateProductStock= async(id, stock) => {
+          const data = {
+            id: id,
+            stock: stock
+          }
+
+            const URL_PUT_STOCK = process.env.REACT_APP_API_URL+"/products/update/";
+            const response_cart = await fetch(URL_PUT_STOCK, {
+              method: 'PUT',
+              headers:{
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            }).then(res => response_cart.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));
+            await getProductsFromAPI();
+        
          }  
   
         const deleteProductCart = async (id) => {
@@ -89,13 +109,12 @@ const AppProvider = ({ children }) => {
             getCartFromAPI();
         }, []);
 
-
-
   return <AppContext.Provider value={{
     loading,
     productos,
     cart,
     addProductCart,
+    updateProductStock,
     updateProductQuantity,
     deleteCart,
     deleteProductCart,
