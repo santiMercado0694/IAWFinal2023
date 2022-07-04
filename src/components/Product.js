@@ -14,6 +14,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
 import { Link } from "react-router-dom";
 import { useStateValue} from "../StateProvider"
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -50,7 +51,7 @@ export default function Product({product : {id, name, details, description, pric
            </Typography>
         }
         title= {name}
-        subheader={"Stock disponible: "+stock}
+        subheader={stock> 0 ? "Stock disponible: "+stock : "Sin Stock"}
       />
       <CardMedia
         component="img"
@@ -64,11 +65,15 @@ export default function Product({product : {id, name, details, description, pric
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+      {stock > 0 ? (
       <Link to={user ? "/cart" : "/signin"}>
-        <IconButton aria-label="Add to Cart" onClick={user ? (event) => addProductCart(id,name,price,stock,image_path,rating) : "error"}>
+        <IconButton  aria-label="Add to Cart" onClick={user & stock > 0 ? (event) => addProductCart(id,name,price,stock,image_path,rating) : "error"} disabled={stock > 0 ? "" : "true"}>
           <AddShoppingCartIcon fontSize='large'/>
         </IconButton>
-       </Link> 
+       </Link>
+      ) :( 
+        <RemoveShoppingCartIcon fontSize='large'/>
+      )}
         {Array(rating)
             .fill()
             .map((_, i) => (
