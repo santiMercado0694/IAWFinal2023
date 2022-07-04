@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import accounting from 'accounting';
 import Button from '@mui/material/Button';
 import Decimal from "decimal.js";
-import { useStateValue} from "../StateProvider"
+import { useStateValue} from "../../StateProvider"
 import { Link } from "react-router-dom";
 
 const Total = ({cart}) => {

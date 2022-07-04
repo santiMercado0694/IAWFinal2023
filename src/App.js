@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import {Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ProductContainer from "./components/ProductContainer";
-import CheckoutPage from "./components/CheckoutPage";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
-import Checkout from "./components/Checkout";
+import Navbar from "./components/layouts/Navbar";
+import Footer from "./components/layouts/Footer";
+import ProductContainer from "./components/store/ProductContainer";
+import CheckoutPage from "./components/cart/CheckoutPage";
+import Signin from "./components/user/Signin";
+import Signup from "./components/user/Signup";
+import Checkout from "./components/cart/Checkout";
 import { auth } from "./firebase";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"

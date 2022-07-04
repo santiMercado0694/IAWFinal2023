@@ -5,14 +5,14 @@ import { Box, createTheme } from '@mui/system';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import logo from "../assets/NombreTienda.png";
+import logo from "../../assets/NombreTienda.png";
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
-import { useStateValue} from "../StateProvider"
-import { auth } from "../firebase";
+import { useStateValue} from "../../StateProvider"
+import { auth } from "../../firebase";
 import {useHistory} from "react-router-dom";
-import { actionTypes} from "../reducer";
-import { useGlobalContext } from '../storeContext'
+import { actionTypes} from "../../reducer";
+import { useGlobalContext } from '../../storeContext'
 
 export default function Navbar() {
 

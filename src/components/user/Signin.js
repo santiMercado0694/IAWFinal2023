@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {Link as RouteLink, useHistory} from "react-router-dom";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 
 function Copyright(props) {
   return (

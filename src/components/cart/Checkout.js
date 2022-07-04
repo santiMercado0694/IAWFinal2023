@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Review from './Review';
-import { useGlobalContext } from '../storeContext'
+import { useGlobalContext } from '../../storeContext'
 
 const steps = ['Ultimo Paso'];
 

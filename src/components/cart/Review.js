@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { useGlobalContext } from '../storeContext'
+import { useGlobalContext } from '../../storeContext'
 import Decimal from "decimal.js";
 import accounting from 'accounting';
 

@@ -6,9 +6,9 @@ import CheckoutCard  from "./CheckoutCard";
 import Button from '@mui/material/Button';
 import Total from "./Total";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from '../storeContext'
-import Loading from './Loading'
-import CarouselCart from "./SliderCart";
+import { useGlobalContext } from '../../storeContext'
+import Loading from '../layouts/Loading'
+import CarouselCart from "../layouts/SliderCart";
 
 const CheckoutPage = () => {
 

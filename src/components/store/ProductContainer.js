@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { Box, createTheme } from '@mui/system';
 import Grid from '@mui/material/Grid';
 import Product from './Product';
-import { useGlobalContext } from '../storeContext'
-import Loading from './Loading'
-import Pagination from "./Pagination";
-import Carousel from "./Slider";
-import { useStateValue} from "../StateProvider"
+import { useGlobalContext } from '../../storeContext'
+import Loading from '../layouts/Loading'
+import Pagination from "../layouts/Pagination";
+import Carousel from "../layouts/Slider";
+import { useStateValue} from "../../StateProvider"
 
 export default function ProductContainer() {
   
