@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
+      {'Todos los derechos reservados © '}
       <Link color="inherit" href="/">
         Bahia computacion
       </Link>{' '}

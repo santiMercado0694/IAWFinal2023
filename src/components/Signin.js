@@ -17,7 +17,7 @@ import { auth } from "../firebase";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © BahiaComputacion '}
+      {'Todos los derechos reservados © BahiaComputacion '}
 
       {new Date().getFullYear()}
     </Typography>
