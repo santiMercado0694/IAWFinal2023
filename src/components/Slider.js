@@ -7,7 +7,9 @@ import gamer2 from "../assets/gamer2.png"
 const CarouselContainer = () => {
     return (
              <div className="Carousel">
+                
                  <Carousel>
+                    
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -15,6 +17,7 @@ const CarouselContainer = () => {
                             alt="First slide"
                         />
                     </Carousel.Item>
+
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -22,6 +25,7 @@ const CarouselContainer = () => {
                             alt="Second slide"
                         />
                     </Carousel.Item>
+
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -29,6 +33,7 @@ const CarouselContainer = () => {
                             alt="Third slide"
                         />
                     </Carousel.Item>
+
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -36,6 +41,7 @@ const CarouselContainer = () => {
                             alt="fourth slide"
                         />
                     </Carousel.Item>
+
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -43,6 +49,7 @@ const CarouselContainer = () => {
                             alt="fifth slide"
                         />
                     </Carousel.Item>
+
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -50,7 +57,9 @@ const CarouselContainer = () => {
                             alt="sixth slide"
                         />
                     </Carousel.Item>
+
                  </Carousel>
+                 
              </div>
             )
 }

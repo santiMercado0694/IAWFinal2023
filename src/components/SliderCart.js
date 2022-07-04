@@ -6,7 +6,9 @@ import about from "../assets/about.png";
 const CarouselContainer = () => {
     return (
              <div className="Carousel">
+                 
                  <Carousel>
+                    
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -14,6 +16,7 @@ const CarouselContainer = () => {
                             alt="First slide"
                         />
                     </Carousel.Item>
+
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -21,7 +24,9 @@ const CarouselContainer = () => {
                             alt="Second slide"
                         />
                     </Carousel.Item>
+
                  </Carousel>
+                 
              </div>
             )
 }

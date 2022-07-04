@@ -15,7 +15,7 @@ import { auth } from "../firebase";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © BahiaComputacion '}
+      {'Todos los derechos reservados © BahiaComputacion '}
       {new Date().getFullYear()}
     </Typography>
   );
@@ -50,8 +50,11 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      
       <Container component="main" maxWidth="xs">
+        
         <CssBaseline />
+        
         <Box
           sx={{
             marginTop: 8,
@@ -60,14 +63,19 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
+
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
+
           <Typography component="h1" variant="h5">
             Registrar cuenta
           </Typography>
+
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            
             <Grid container spacing={2}>
+              
               <Grid item xs={12}>
                 <TextField
                  value = {email}
@@ -80,6 +88,7 @@ export default function SignUp() {
                   autoComplete="email"
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                 value = {password}
@@ -93,7 +102,9 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
+
             </Grid>
+            
             <Button
               type="submit"
               fullWidth
@@ -101,19 +112,28 @@ export default function SignUp() {
               sx={{ mt: 3, mb: 2 }}
               onClick = {signup}
             >
-              Registrar
+            Registrar
+
             </Button>
+
             <Grid container justifyContent="flex-end">
+              
               <Grid item>
                 <RouteLink to="/signin" >
                   Ya tienes una cuenta? Iniciar sesion
                 </RouteLink>
               </Grid>
+
             </Grid>
+
           </Box>
+
         </Box>
+
         <Copyright sx={{ mt: 5 }} />
+
       </Container>
+      
     </ThemeProvider>
   );
 }

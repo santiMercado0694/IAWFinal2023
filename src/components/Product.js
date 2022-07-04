@@ -38,7 +38,9 @@ export default function Product({product : {id, name, details, description, pric
 
   return (
     <Card sx={{ maxWidth: 350, backgroundColor: "#eeeeee"}}>
+      
       <CardHeader
+        
         action={
           <Typography
             className={fabClasses.action}
@@ -48,30 +50,41 @@ export default function Product({product : {id, name, details, description, pric
             {accounting.formatMoney(price)}
            </Typography>
         }
+
         title= {name}
         subheader={stock> 0 ? "Stock disponible: "+stock : "Sin Stock"}
+
       />
+
       <CardMedia
         component="img"
         height="350"
         image={image_path}
         alt="imagen"
       />
+
       <CardContent>
+
         <Typography variant="body2" color="text.secondary">
-        {details}
+
+          {details}
+
         </Typography>
+
       </CardContent>
+
       <CardActions disableSpacing>
+
       {stock > 0 ? (
-      <Link to={user ? "/cart" : "/signin"}>
-        <IconButton  aria-label="Add to Cart" onClick={user ? (event) => addProductCart(id,name,price,stock,image_path,rating) : "error"}>
-          <AddShoppingCartIcon fontSize='large'/>
-        </IconButton>
-       </Link>
+                    <Link to={user ? "/cart" : "/signin"}>
+                      <IconButton  aria-label="Add to Cart" onClick={user ? (event) => addProductCart(id,name,price,stock,image_path,rating) : "error"}>
+                        <AddShoppingCartIcon fontSize='large'/>
+                      </IconButton>
+                    </Link>
       ) :( 
         <RemoveShoppingCartIcon fontSize='large'/>
       )}
+
         {Array(rating)
             .fill()
             .map((_, i) => (
@@ -84,16 +97,24 @@ export default function Product({product : {id, name, details, description, pric
           aria-label="show more"
         >
           <ExpandMoreIcon />
+
         </ExpandMore>
+
       </CardActions>
+
       <Collapse in={expanded} timeout="auto" unmountOnExit>
+
         <CardContent>
+
           <Typography paragraph>Descripcion:</Typography>
           <Typography paragraph>
           {description}
           </Typography>
+
         </CardContent>
+
       </Collapse>
+
     </Card>
   );
 }

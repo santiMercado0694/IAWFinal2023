@@ -11,12 +11,10 @@ import Checkout from "./components/Checkout";
 import { auth } from "./firebase";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"
-import { useGlobalContext } from './storeContext'
 
 function App() {
 
   const [{user}, dispatch] = useStateValue();
-  const {cart} = useGlobalContext();
 
 useEffect(() => {
   auth.onAuthStateChanged((authUser) =>{

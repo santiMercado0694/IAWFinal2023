@@ -6,9 +6,12 @@ import '../App.css';
 const Loading = () => {
  return (
   <div className="divPadre">
+        
         <div className="divHijo">
+            
             <Spinner color="primary" className="spinnerReactstrap" />
         </div>
+        
  </div>
  )
 }

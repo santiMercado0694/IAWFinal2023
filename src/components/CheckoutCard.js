@@ -42,12 +42,19 @@ export default function CheckoutCard({product : {id, name, price, stock, quantit
         />
     
       <CardActions sx={{ display: "flex", justifyContent: "space-between", textAlign: "center" }}>
+
          <IconButton aria-label="Add to Cart" onClick={(quantity < stock) ? ((event) => updateProductQuantity(id, quantity+1)) : "error"} >
+
           <AddCircleIcon fontSize='large'/>
+
          </IconButton>
+
          <IconButton aria-label="Substract from cart" onClick={(quantity > 1) ? ((event) => updateProductQuantity(id, quantity-1)) : "error"} >
+
           <RemoveCircleIcon fontSize='large'/>
+
          </IconButton>
+       
        <Box sx={{ display: "flex"}} >
         {Array(rating)
             .fill()
@@ -56,11 +63,16 @@ export default function CheckoutCard({product : {id, name, price, stock, quantit
             ))
         }
        </Box>
+
        <Link to="/cart">
+
         <IconButton onClick={(event) => deleteProductCart(id)} > 
+
             <DeleteIcon fontSize="large"/>
+
         </IconButton>
-      </Link>
+        
+       </Link>
         
       </CardActions>
 

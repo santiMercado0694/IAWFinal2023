@@ -26,6 +26,7 @@ export default function StickyFooter() {
         flexDirection: 'column',
       }}
     >
+      
       <CssBaseline />
       <Box
         component="footer"
@@ -39,12 +40,19 @@ export default function StickyFooter() {
               : theme.palette.grey[800],
         }}
       >
+
         <Container maxWidth="sm">
+
           <Typography variant="body1">
+
             Proyecto React IAW 2022
+
           </Typography>
+
           <Copyright />
+
         </Container>
+
       </Box>
     </Box>
   );

@@ -18,7 +18,6 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Todos los derechos reservados © BahiaComputacion '}
-
       {new Date().getFullYear()}
     </Typography>
   );
@@ -50,8 +49,11 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={theme}>
+
       <Grid container component="main" sx={{ height: '100vh' }}>
+
         <CssBaseline />
+
         <Grid
           item
           xs={false}
@@ -65,6 +67,7 @@ export default function SignInSide() {
             backgroundPosition: 'center',
           }}
         />
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -75,12 +78,17 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
+
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              
               <LockOutlinedIcon />
+
             </Avatar>
+
             <Typography component="h1" variant="h5">
               Iniciar sesion
             </Typography>
+
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
               value = {email}
@@ -94,6 +102,7 @@ export default function SignInSide() {
                 autoComplete="email"
                 autoFocus
               />
+
               <TextField
               value = {password}
               onChange = {e => setPaswword(e.target.value)}
@@ -106,10 +115,12 @@ export default function SignInSide() {
                 id="password"
                 autoComplete="current-password"
               />
+
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Recordarme"
               />
+
               <Button
                 type="submit"
                 fullWidth
@@ -118,19 +129,33 @@ export default function SignInSide() {
                 onClick = {signin}
               >
                 Iniciar sesion
+
               </Button>
+
               <Grid container>
+
                 <Grid item>
+
                   <RouteLink to="/signup" >
+
                     {"Todavia no tiene una cuenta? Registrese"}
+
                   </RouteLink>
+
                 </Grid>
+
               </Grid>
+
               <Copyright sx={{ mt: 5 }} />
+
             </Box>
+
           </Box>
+
         </Grid>
+
       </Grid>
+      
     </ThemeProvider>
   );
 }

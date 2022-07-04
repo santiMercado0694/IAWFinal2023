@@ -80,7 +80,9 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
+
                 {getStepContent(activeStep)}
+                
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Button
                     variant="contained"
@@ -90,7 +92,9 @@ export default function Checkout() {
                     Finalizar compra
                   </Button>
                 </Box>
+
               </React.Fragment>
+
             )}
 
           </React.Fragment>

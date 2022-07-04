@@ -32,21 +32,25 @@ const theme = createTheme();
 
   return (
    <Box>
+   
     <Carousel/>
+    
     <Box sx={{ flexGrow: 1 , padding: theme.spacing(2)}}>
-      <Grid container spacing={2}>
+      
+      <Grid container spacing={2}>   
           {
              currentPosts.map(product => (
               <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
                   <Product  product={product} addProductCart={addProductCart} user={user} />
               </Grid>
              ))
-          }
-          
+          }        
        </Grid>
        
     </Box> 
-          <Pagination postsPerPage={postsPerPage} totalPosts={productos.length} paginate={paginate} />  
+
+          <Pagination postsPerPage={postsPerPage} totalPosts={productos.length} paginate={paginate} /> 
+           
    </Box>
     
   );
