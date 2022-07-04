@@ -6,6 +6,7 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [productos, setProductos] = useState([]);
   const [cart, setCart] = useState([]);
+  const [search, setSearch] = useState("");
 
 
   const getProductsFromAPI = async() => {
@@ -115,6 +116,8 @@ const AppProvider = ({ children }) => {
     loading,
     productos,
     cart,
+    search,
+    setSearch,
     addProductCart,
     updateProductStock,
     updateProductQuantity,
