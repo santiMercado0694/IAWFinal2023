@@ -41,7 +41,7 @@ const theme = createTheme();
         <Toolbar>
           
           <Link to="/">
-           <IconButton edge= "start" color="inherit" aria-label="menu">
+           <IconButton edge= "start" color="inherit" aria-label="menu" >
              <img src={logo} alt="Bahia computacion"/>
            </IconButton>
           </Link>

@@ -1,4 +1,5 @@
-import  React from 'react';
+import React from 'react';
+import Select from 'react-select';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -46,8 +47,36 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({setSearch}) {
+export default function PrimarySearchAppBar({setSearch, categories, getProductsByCategory, getProductsFromAPI}) {
 
+  const handleFilter = ( {value} ) => {
+      getProductsByCategory(value)
+  }
+
+  const colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: 'white' }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? 'red' : 'white',
+        color: '#00000f',
+        cursor: isDisabled ? 'not-allowed' : 'default',
+      };
+    },
+  };
+
+  function customTheme(theme) {
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary25: 'orange',
+        primary: 'green',
+      },
+    };
+  }
+
+  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -65,7 +94,18 @@ export default function PrimarySearchAppBar({setSearch}) {
               inputProps={{ 'aria-label': 'search' }}
               onChange={(e) => setSearch(e.target.value)}
             />
-          </Search>   
+          </Search>
+
+          <Select
+                  theme = {customTheme}
+                  styles = {colourStyles}
+                  options = {categories.map(cat => ({
+                      label: cat.nombre, value: cat.id
+                   }))}
+                   onChange = {handleFilter}
+                   className = "mb-0"
+                   placeholder = "Filtrar producto por categoria"                      
+          />   
 
         </Toolbar>
 

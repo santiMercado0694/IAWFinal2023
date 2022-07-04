@@ -6,6 +6,7 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [productos, setProductos] = useState([]);
   const [cart, setCart] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState("");
 
 
@@ -18,6 +19,14 @@ const AppProvider = ({ children }) => {
       setLoading(false)
  
   }
+
+  const getProductsByCategory = async(id) => {
+    const URL_productos = process.env.REACT_APP_API_URL+"/products/category/"+id;
+    const response_productos = await fetch(URL_productos);
+    const dataProductos = await response_productos.json();
+    setProductos(dataProductos);
+
+}
  
   const addProductCart= async(id,name,price,stock,image_path,rating) => {
    const data = {
@@ -105,11 +114,18 @@ const AppProvider = ({ children }) => {
           await getCartFromAPI();
         }
 
-        
-    
+        const getCategoriesFromAPI = async() => {    
+          const URL_CATEGORIES = process.env.REACT_APP_API_URL+"/categories/";
+          const response_categories = await fetch(URL_CATEGORIES);
+          const dataCategories = await response_categories.json();
+          setCategories(dataCategories);
+  
+      }
+
         useEffect( () => {
             getProductsFromAPI();
             getCartFromAPI();
+            getCategoriesFromAPI();
         }, []);
 
   return <AppContext.Provider value={{
@@ -117,7 +133,10 @@ const AppProvider = ({ children }) => {
     productos,
     cart,
     search,
+    categories,
+    setCategories,
     setSearch,
+    getProductsByCategory,
     addProductCart,
     updateProductStock,
     updateProductQuantity,

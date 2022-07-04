@@ -15,7 +15,7 @@ const theme = createTheme();
 
  // Hooks
 
- const {productos, addProductCart, loading, search, setSearch} = useGlobalContext();
+ const {productos, addProductCart, loading, search, setSearch, categories, getProductsByCategory} = useGlobalContext();
  const [currentPage, setCurrentPage] = useState(1);
  const [postsPerPage] = useState(4);
  const [{user}] = useStateValue();
@@ -39,7 +39,7 @@ const theme = createTheme();
    
     <Carousel/>
 
-    <Search setSearch={setSearch}/>
+    <Search setSearch={setSearch} categories={categories} getProductsByCategory={getProductsByCategory} />
     
     <Box sx={{ flexGrow: 1 , padding: theme.spacing(2)}}>
       
