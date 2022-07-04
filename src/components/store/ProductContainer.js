@@ -21,6 +21,7 @@ const theme = createTheme();
  const [{user}] = useStateValue();
 
 
+
  //Pagination
  const indexOfLastPost = currentPage * postsPerPage;
  const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -50,7 +51,7 @@ const theme = createTheme();
               </Grid>
              ))
       ):(
-          productos.filter((product) => product.name.toLowerCase().includes(search)).map(product => (
+          productos.filter((product) => product.name.toLowerCase().includes(search.toLowerCase())).map(product => (
             <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
                 <Product  product={product} addProductCart={addProductCart} user={user} />
             </Grid>
