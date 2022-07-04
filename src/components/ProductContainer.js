@@ -6,6 +6,7 @@ import { useGlobalContext } from '../storeContext'
 import Loading from './Loading'
 import Pagination from "./Pagination";
 import Carousel from "./Slider";
+import { useStateValue} from "../StateProvider"
 
 export default function ProductContainer() {
   
@@ -16,6 +17,7 @@ const theme = createTheme();
  const {productos, addProductCart, loading} = useGlobalContext();
  const [currentPage, setCurrentPage] = useState(1);
  const [postsPerPage] = useState(4);
+ const [{user}] = useStateValue();
 
  //Pagination
  const indexOfLastPost = currentPage * postsPerPage;
@@ -36,7 +38,7 @@ const theme = createTheme();
           {
              currentPosts.map(product => (
               <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
-                  <Product  product={product} addProductCart={addProductCart} />
+                  <Product  product={product} addProductCart={addProductCart} user={user} />
               </Grid>
              ))
           }

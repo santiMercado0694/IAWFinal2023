@@ -13,7 +13,7 @@ import { fabClasses } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
 import { Link } from "react-router-dom";
-import { useStateValue} from "../StateProvider"
+
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 
 const ExpandMore = styled((props) => {
@@ -29,10 +29,8 @@ const ExpandMore = styled((props) => {
 
 
 
-export default function Product({product : {id, name, details, description, price, stock, category_id, image_path, rating }, addProductCart}) {
+export default function Product({product : {id, name, details, description, price, stock, category_id, image_path, rating }, addProductCart, user}) {
   const [expanded, setExpanded] = React.useState(false);
-
-  const [{user}] = useStateValue();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
