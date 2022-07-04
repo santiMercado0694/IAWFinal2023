@@ -19,7 +19,6 @@
 .spinnerReactstrap{
       width: 100px !important;
       height: 100px !important;
-
       border: 10px solid currentColor !important;
       border-right-color: transparent !important;
 }

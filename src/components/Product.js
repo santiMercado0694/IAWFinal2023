@@ -67,7 +67,7 @@ export default function Product({product : {id, name, details, description, pric
       <CardActions disableSpacing>
       {stock > 0 ? (
       <Link to={user ? "/cart" : "/signin"}>
-        <IconButton  aria-label="Add to Cart" onClick={user & stock > 0 ? (event) => addProductCart(id,name,price,stock,image_path,rating) : "error"} disabled={stock > 0 ? "" : "true"}>
+        <IconButton  aria-label="Add to Cart" onClick={user ? (event) => addProductCart(id,name,price,stock,image_path,rating) : "error"}>
           <AddShoppingCartIcon fontSize='large'/>
         </IconButton>
        </Link>

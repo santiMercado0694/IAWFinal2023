@@ -11,10 +11,12 @@ import Checkout from "./components/Checkout";
 import { auth } from "./firebase";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"
+import { useGlobalContext } from './storeContext'
 
 function App() {
 
   const [{user}, dispatch] = useStateValue();
+  const {cart} = useGlobalContext();
 
 useEffect(() => {
   auth.onAuthStateChanged((authUser) =>{
@@ -34,10 +36,22 @@ useEffect(() => {
        <Navbar />
                <Switch>
                      <Route exact path="/" component={ProductContainer} />         
-                     <Route path="/cart" component={CheckoutPage} /> 
+                     <Route path="/cart" >
+                        { user ?(
+                          <CheckoutPage/>
+                        ):(
+                          <ProductContainer/>
+                        )}  
+                     </Route>
                      <Route path="/signin" component={Signin} />
                      <Route path="/signup" component={Signup} />
-                     <Route path="/Checkout" component={Checkout} />                                   
+                     <Route path="/Checkout">  
+                      {cart.length > 0 ?(
+                        <Checkout/>
+                      ):(
+                        <ProductContainer/>
+                      )} 
+                     </Route>                                
                </Switch>
       <Footer/>
       </div>
