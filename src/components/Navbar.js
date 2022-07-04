@@ -49,11 +49,15 @@ const theme = createTheme();
             </Button>
           </Link>
           <Link to="/cart">
+            {user ?(
           <IconButton aria-label='show cart items' color='inherit'>
             <Badge badgeContent={cart.reduce((acc, item) => acc + item.quantity, 0) } color="error">
                 <ShoppingCart fontSize='large' color="primary"/>
             </Badge>
           </IconButton>
+          ):(
+            ""
+          )}
           </Link>
         </Toolbar>
       </AppBar>
