@@ -103,6 +103,8 @@ const AppProvider = ({ children }) => {
           await fetch(URL_DELETE_PRODUCTO, { method: 'DELETE' });
           await getCartFromAPI();
         }
+
+        
     
         useEffect( () => {
             getProductsFromAPI();

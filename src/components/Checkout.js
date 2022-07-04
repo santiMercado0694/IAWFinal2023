@@ -35,6 +35,7 @@ export default function Checkout() {
     cart.map((product) => (
         updateProductStock(product.id, (product.stock - product.quantity))
     ))
+    
     deleteCart();
 
   };

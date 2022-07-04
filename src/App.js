@@ -46,7 +46,7 @@ useEffect(() => {
                      <Route path="/signin" component={Signin} />
                      <Route path="/signup" component={Signup} />
                      <Route path="/Checkout">  
-                      {cart.length > 0 ?(
+                      {user ?(
                         <Checkout/>
                       ):(
                         <ProductContainer/>
