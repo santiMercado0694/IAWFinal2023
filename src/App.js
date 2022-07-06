@@ -1,24 +1,59 @@
-import logo from './logo.svg';
+import { useEffect } from "react";
+import {Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import Navbar from "./components/layouts/Navbar";
+import Footer from "./components/layouts/Footer";
+import ProductContainer from "./components/store/ProductContainer";
+import CheckoutPage from "./components/cart/CheckoutPage";
+import Signin from "./components/user/Signin";
+import Signup from "./components/user/Signup";
+import Checkout from "./components/cart/Checkout";
+import { auth } from "./firebase";
+import { actionTypes} from "./reducer";
+import { useStateValue} from "./StateProvider"
 
 function App() {
+
+  const [{user}, dispatch] = useStateValue();
+
+useEffect(() => {
+  auth.onAuthStateChanged((authUser) =>{
+    console.log(authUser);
+    if(authUser){
+      dispatch({
+        type : actionTypes.SET_USER,
+        user : authUser,
+      })
+    }
+  })
+},[dispatch])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> Mi pagina web en React.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <Router>
+      <div className="App">
+       <Navbar />
+               <Switch>
+                     <Route exact path="/" component={ProductContainer} />         
+                     <Route path="/cart" >
+                        { user ?(
+                          <CheckoutPage/>
+                        ):(
+                          <ProductContainer/>
+                        )}  
+                     </Route>
+                     <Route path="/signin" component={Signin} />
+                     <Route path="/signup" component={Signup} />
+                     <Route path="/Checkout">  
+                      {user ?(
+                        <Checkout/>
+                      ):(
+                        <ProductContainer/>
+                      )} 
+                     </Route>                                
+               </Switch>
+      <Footer/>
+      </div>
+     </Router>
   );
 }
 
