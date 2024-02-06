@@ -11,6 +11,7 @@ import Checkout from "./components/cart/Checkout";
 import { auth } from "./firebase";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"
+import React from "react";
 
 function App() {
 
