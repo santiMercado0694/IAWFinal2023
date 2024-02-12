@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import DownloadBar from "./components/layouts/DownloadBar";
 import Navbar from "./components/layouts/Navbar";
 import Footer from "./components/layouts/Footer";
 import ProductContainer from "./components/store/ProductContainer";
@@ -52,6 +53,7 @@ useEffect(() => {
                       )} 
                      </Route>                                
                </Switch>
+      <DownloadBar/>
       <Footer/>
       </div>
      </Router>
