@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 
+// @ts-ignore
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
@@ -21,11 +22,14 @@ const AppProvider = ({ children }) => {
   }
 
   const getProductsByCategory = async(id) => {
+    if (id === 'all') {
+      await getProductsFromAPI();
+    } else {
     const URL_productos = process.env.REACT_APP_API_URL+"/products/category/"+id;
     const response_productos = await fetch(URL_productos);
     const dataProductos = await response_productos.json();
     setProductos(dataProductos);
-
+    }
 }
  
   const addProductCart= async(id,name,price,stock,image_path,rating) => {

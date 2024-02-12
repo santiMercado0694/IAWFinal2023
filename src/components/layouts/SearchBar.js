@@ -49,8 +49,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar({setSearch, categories, getProductsByCategory, getProductsFromAPI}) {
 
-  const handleFilter = ( {value} ) => {
-      getProductsByCategory(value)
+  const handleFilter = ({ value }) => {
+      getProductsByCategory(value);
   }
 
   const colourStyles = {
@@ -76,15 +76,10 @@ export default function PrimarySearchAppBar({setSearch, categories, getProductsB
     };
   }
 
-  
-
   return (
     <Box sx={{ flexGrow: 1 }}>
-
       <AppBar position="static">
-
         <Toolbar>
-
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -97,20 +92,23 @@ export default function PrimarySearchAppBar({setSearch, categories, getProductsB
           </Search>
 
           <Select
-                  theme = {customTheme}
-                  styles = {colourStyles}
-                  options = {categories.map(cat => ({
-                      label: cat.nombre, value: cat.id
-                   }))}
-                   onChange = {handleFilter}
-                   className = "mb-0"
-                   placeholder = "Filtrar producto por categoria"                      
+            theme={customTheme}
+            styles={colourStyles}
+            options={[
+              // Agregar una opción para mostrar todos los productos
+              { label: 'Todos los productos', value: 'all' },
+              ...categories.map(cat => ({
+                label: cat.nombre, value: cat.id
+              }))
+            ]}
+            onChange={handleFilter}
+            className="mb-0"
+            placeholder="Filtrar producto por categoría"
           />   
 
         </Toolbar>
-
       </AppBar>
-
     </Box>
   );
 }
+
