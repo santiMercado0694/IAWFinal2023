@@ -47,13 +47,13 @@ const theme = createTheme();
           </Link>
           
           <Box sx={{flexGrow: 1 }}></Box>
-          <Link to="/signin">
+          <Link to="/signin" aria-label="Iniciar sesión">
             <Button variant="outlined" onClick = {(e) => handleAuth(e)} style={{ color: "black"}} sx={{ marginLeft: theme.spacing(2) }}>
               <strong>{user ? "Cerrar sesion" : "Iniciar sesion" }</strong>
             </Button>
           </Link>
 
-          <Link to="/cart">
+          <Link to="/cart" aria-label="Ver carrito">
             {user ?(
                     <IconButton aria-label='show cart items' color='inherit'>
                       <Badge badgeContent={cart.reduce((acc, item) => acc + item.quantity, 0) } color="error">

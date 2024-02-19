@@ -7,20 +7,28 @@ import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
-
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
+  backgroundColor: 'white',
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto',
+  },
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: '#000',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 6), // Ajuste del padding izquierdo
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
   },
 }));
 
@@ -32,25 +40,18 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  zIndex: 1,
+  left: 0, // Ajuste de posición izquierda
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
+const CustomSearchIcon = styled(SearchIcon)({
+  color: '#555',
+});
 
-export default function PrimarySearchAppBar({setSearch, categories, getProductsByCategory, getProductsFromAPI}) {
+export default function PrimarySearchAppBar({ setSearch, categories, getProductsByCategory, getProductsFromAPI }) {
 
   const handleFilter = ({ value }) => {
-      getProductsByCategory(value);
+    getProductsByCategory(value);
   }
 
   const colourStyles = {
@@ -82,7 +83,7 @@ export default function PrimarySearchAppBar({setSearch, categories, getProductsB
         <Toolbar>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <CustomSearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Buscar productos"
@@ -91,11 +92,13 @@ export default function PrimarySearchAppBar({setSearch, categories, getProductsB
             />
           </Search>
 
+          <label htmlFor="category-select" style={{ marginRight: '8px' }}>Buscar por categoria:</label> {/* Etiqueta asociada al Select */}
           <Select
+            id="category-select" // Establecer un id para el Select
+            aria-label="Seleccionar categoría"
             theme={customTheme}
             styles={colourStyles}
             options={[
-              // Agregar una opción para mostrar todos los productos
               { label: 'Todos los productos', value: 'all' },
               ...categories.map(cat => ({
                 label: cat.nombre, value: cat.id
@@ -104,11 +107,10 @@ export default function PrimarySearchAppBar({setSearch, categories, getProductsB
             onChange={handleFilter}
             className="mb-0"
             placeholder="Filtrar producto por categoría"
-          />   
+          />
 
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
-
