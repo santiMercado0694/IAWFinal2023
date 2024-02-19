@@ -687,5 +687,20 @@
   "scope": "/",
   "short_name": "PWA BHC",
   "start_url":"/",
-  "theme_color": "orange"
+  "theme_color": "orange",
+  "screenshots": [
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1918x1040",
+      "type": "image/png",
+      "purpose": "any",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "1079x2076",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
