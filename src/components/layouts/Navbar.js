@@ -5,7 +5,7 @@ import { Box, createTheme } from '@mui/system';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import logo from "../../assets/NombreTienda.png";
+import logo from "../../assets/NombreTienda.webp";
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
 import { useStateValue} from "../../StateProvider"
