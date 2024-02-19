@@ -20,5 +20,5 @@
   "scope": "/",
   "short_name": "PWA BHC",
   "start_url":"/",
-  "theme_color": "#orange"
+  "theme_color": "orange"
 }
