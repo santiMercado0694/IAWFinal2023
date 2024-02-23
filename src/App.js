@@ -1,7 +1,7 @@
+import React from "react";
 import { useEffect } from "react";
 import {Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-import DownloadBar from "./components/layouts/DownloadBar";
 import Navbar from "./components/layouts/Navbar";
 import Footer from "./components/layouts/Footer";
 import ProductContainer from "./components/store/ProductContainer";
@@ -9,14 +9,14 @@ import CheckoutPage from "./components/cart/CheckoutPage";
 import Signin from "./components/user/Signin";
 import Signup from "./components/user/Signup";
 import Checkout from "./components/cart/Checkout";
-import { auth } from "./firebase";
+import DownloadBar from "./components/layouts/DownloadBar";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"
-import React from "react";
+import { auth} from "./firebase";
 
 function App() {
 
-  const [{user}, dispatch] = useStateValue();
+const [{user}, dispatch] = useStateValue();
 
 useEffect(() => {
   auth.onAuthStateChanged((authUser) =>{
