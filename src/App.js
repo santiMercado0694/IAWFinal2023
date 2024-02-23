@@ -13,10 +13,12 @@ import DownloadBar from "./components/layouts/DownloadBar";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"
 import { auth} from "./firebase";
+import OneSignal from 'react-onesignal';
 
 function App() {
 
 const [{user}, dispatch] = useStateValue();
+
 
 useEffect(() => {
   auth.onAuthStateChanged((authUser) =>{
@@ -26,6 +28,7 @@ useEffect(() => {
         type : actionTypes.SET_USER,
         user : authUser,
       })
+      OneSignal.init({ appId: 'cbb828bb-a3d0-4d28-b9b8-7093d3efeae6' });
     }
   })
 },[dispatch])

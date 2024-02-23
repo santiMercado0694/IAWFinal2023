@@ -1,10 +1,12 @@
 /* eslint-disable no-restricted-globals */
-
 import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 import { StaleWhileRevalidate } from "workbox-strategies";
+
+// Agregar el SDK de OneSignal
+importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
 
 clientsClaim();
 
@@ -47,9 +49,34 @@ registerRoute(
       ],
     })
   );
-  self.addEventListener("message", (event) => {
-    if (event.data && event.data.type === "SKIP_WAITING") {
-      // @ts-ignore
-      self.skipWaiting();
-    }
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    // @ts-ignore
+    self.skipWaiting();
+  }
+});
+
+// Configurar OneSignal con tu ID de aplicación
+var OneSignal = self.OneSignal || [];
+OneSignal.push(function() {
+  // @ts-ignore
+  OneSignal.init({
+    appId: "cbb828bb-a3d0-4d28-b9b8-7093d3efeae6",
   });
+});
+
+self.addEventListener('push', function(event) {
+  console.log('Push notification received', event);
+
+  var title = 'Push notification';
+  var options = {
+    // @ts-ignore
+    body: event.data.text(),
+    icon: '/icon.png',
+    badge: '/badge.png'
+  };
+
+  // @ts-ignore
+  event.waitUntil(self.registration.showNotification(title, options));
+});
