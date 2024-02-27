@@ -1,41 +1,20 @@
-import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { CssBaseline, Box, Container, Paper, Stepper, Step, StepLabel, Button, Typography, createTheme, ThemeProvider } from '@mui/material';
 import Review from './Review';
 import { useGlobalContext } from '../../storeContext';
-import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
+import { Link } from 'react-router-dom';
 
 const steps = ['Ultimo Paso'];
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
 
 const theme = createTheme();
 
 export default function Checkout() {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const {cart, updateProductStock, deleteCart } = useGlobalContext();
+  const [activeStep, setActiveStep] = useState(0);
+  const { cart, updateProductStock, deleteCart } = useGlobalContext();
 
-  const handleChange = (e) => {
+  const handleChange = () => {
     setActiveStep(activeStep + 1);
-    cart.map((product) => (
-      updateProductStock(product.id, (product.stock - product.quantity))
-    ));
-    
+    cart.forEach((product) => updateProductStock(product.id, product.stock - product.quantity));
     deleteCart();
   };
 
@@ -54,41 +33,30 @@ export default function Checkout() {
               </Step>
             ))}
           </Stepper>
-          <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Gracias por comprar en Bahia Computacion.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Su numero de orden es #20050. Gracias por confiar en nosotros
-                </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-                  <Button
-                    variant="contained"
-                    component={Link} 
-                    to="/" 
-                    sx={{ mr: 1 }}
-                  >
-                    Volver a la tienda
-                  </Button>
-                </Box>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
-                  <Button
-                    variant="contained"
-                    onClick={(e) => handleChange(e)}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
-                    Finalizar compra
-                  </Button>
-                </Box>
-              </React.Fragment>
-            )}
-          </React.Fragment>
+          {activeStep === steps.length ? (
+            <>
+              <Typography variant="h5" gutterBottom>
+                Gracias por comprar en Bahia Computacion.
+              </Typography>
+              <Typography variant="subtitle1">
+                Su numero de orden es #20050. Gracias por confiar en nosotros
+              </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <Button variant="contained" component={Link} to="/" sx={{ mr: 1 }}>
+                  Volver a la tienda
+                </Button>
+              </Box>
+            </>
+          ) : (
+            <>
+              <Review />
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+                <Button variant="contained" onClick={handleChange} sx={{ mt: 3, ml: 1 }}>
+                  Finalizar compra
+                </Button>
+              </Box>
+            </>
+          )}
         </Paper>
       </Container>
     </ThemeProvider>

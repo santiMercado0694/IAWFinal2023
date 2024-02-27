@@ -9,7 +9,6 @@ import CheckoutPage from "./components/cart/CheckoutPage";
 import Signin from "./components/user/Signin";
 import Signup from "./components/user/Signup";
 import Checkout from "./components/cart/Checkout";
-import DownloadBar from "./components/layouts/DownloadBar";
 import { actionTypes} from "./reducer";
 import { useStateValue} from "./StateProvider"
 import { auth} from "./firebase";
@@ -85,7 +84,6 @@ useEffect(() => {
                       )} 
                      </Route>                                
                </Switch>
-      <DownloadBar/>
       <Footer/>
       </div>
      </Router>

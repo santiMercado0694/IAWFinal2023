@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@firebase/messaging": "^0.12.6"
+    "@firebase/messaging": "^0.12.6",
+    "terser": "^5.28.1"
   }
 }

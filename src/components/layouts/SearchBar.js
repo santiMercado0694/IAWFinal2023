@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
+import { styled } from '@mui/material/styles';
+import { AppBar, Toolbar, Button } from '@mui/material';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -23,7 +22,7 @@ const Search = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: '#000',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 6), // Ajuste del padding izquierdo
+    padding: theme.spacing(1, 1, 1, 6),
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -41,41 +40,61 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 1,
-  left: 0, // Ajuste de posición izquierda
+  left: 0,
 }));
 
 const CustomSearchIcon = styled(SearchIcon)({
   color: '#555',
 });
 
-export default function PrimarySearchAppBar({ setSearch, categories, getProductsByCategory, getProductsFromAPI }) {
+const ButtonWrapper = styled('div')(({ theme }) => ({
+  marginLeft: 'auto', // Esto mueve el botón hacia la derecha
+}));
 
-  const handleFilter = ({ value }) => {
-    getProductsByCategory(value);
-  }
+export default function PrimarySearchAppBar({ onDownload, setSearch, categories, getProductsByCategory }) {
+
+  const [isReadyForInstall, setIsReadyForInstall] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event) => {
+      event.preventDefault();
+      console.log("👍", "beforeinstallprompt", event);
+      window.deferredPrompt = event;
+      setIsReadyForInstall(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const downloadApp = async () => {
+    console.log("👍", "butInstall-clicked");
+    const promptEvent = window.deferredPrompt;
+    if (!promptEvent) {
+      console.log("oops, no prompt event guardado en window");
+      return;
+    }
+    promptEvent.prompt();
+    const result = await promptEvent.userChoice;
+    console.log("👍", "userChoice", result);
+    window.deferredPrompt = null;
+    setIsReadyForInstall(false);
+  };
+
+  const handleFilter = ({ value }) => getProductsByCategory(value);
 
   const colourStyles = {
     control: styles => ({ ...styles, backgroundColor: 'white' }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      return {
-        ...styles,
-        backgroundColor: isDisabled ? 'red' : 'white',
-        color: '#00000f',
-        cursor: isDisabled ? 'not-allowed' : 'default',
-      };
-    },
+    option: (styles, { isDisabled }) => ({
+      ...styles,
+      backgroundColor: isDisabled ? 'red' : 'white',
+      color: '#00000f',
+      cursor: isDisabled ? 'not-allowed' : 'default',
+    }),
   };
-
-  function customTheme(theme) {
-    return {
-      ...theme,
-      colors: {
-        ...theme.colors,
-        primary25: 'orange',
-        primary: 'green',
-      },
-    };
-  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -92,23 +111,22 @@ export default function PrimarySearchAppBar({ setSearch, categories, getProducts
             />
           </Search>
 
-          <label htmlFor="category-select" style={{ marginRight: '8px' }}>Buscar por categoria:</label> {/* Etiqueta asociada al Select */}
+          <label htmlFor="category-select" style={{ marginRight: '8px' }}>Buscar por categoria:</label>
           <Select
-            id="category-select" // Establecer un id para el Select
+            id="category-select"
             aria-label="Seleccionar categoría"
-            theme={customTheme}
             styles={colourStyles}
-            options={[
-              { label: 'Todos los productos', value: 'all' },
-              ...categories.map(cat => ({
-                label: cat.nombre, value: cat.id
-              }))
-            ]}
+            options={[{ label: 'Todos los productos', value: 'all' }, ...categories.map(cat => ({ label: cat.nombre, value: cat.id }))] }
             onChange={handleFilter}
             className="mb-0"
             placeholder="Filtrar producto por categoría"
+            isSearchable={false}
           />
-
+          <ButtonWrapper>
+            {isReadyForInstall && <Button variant="contained" color="primary" onClick={downloadApp}>
+              Descargar
+            </Button>}
+          </ButtonWrapper>
         </Toolbar>
       </AppBar>
     </Box>

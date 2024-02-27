@@ -8,25 +8,20 @@ const LazyImage = ({ src, alt }) => {
     let observer;
     let didCancel = false;
 
+    const handleIntersection = (entries) => {
+      entries.forEach((entry) => {
+        if (!didCancel && (entry.intersectionRatio > 0 || entry.isIntersecting)) {
+          setImageSrc(src);
+          observer.unobserve(imageRef);
+        }
+      });
+    };
+
     if (imageRef && !imageSrc) {
       if (IntersectionObserver) {
-        observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!didCancel && (entry.intersectionRatio > 0 || entry.isIntersecting)) {
-                setImageSrc(src);
-                observer.unobserve(imageRef);
-              }
-            });
-          },
-          {
-            threshold: 0.01,
-            rootMargin: '75%',
-          }
-        );
+        observer = new IntersectionObserver(handleIntersection, { threshold: 0.01, rootMargin: '75%' });
         observer.observe(imageRef);
       } else {
-        // Fallback for browsers without IntersectionObserver support
         setImageSrc(src);
       }
     }

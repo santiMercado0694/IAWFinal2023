@@ -1,36 +1,19 @@
 import React from 'react';
 import '../../App.css';
-import { Carousel} from 'react-bootstrap';
-import about from "../../assets/about.webp";
+import { Carousel } from 'react-bootstrap';
+import about from '../../assets/about.webp';
+import precio from '../../assets/precios.webp';
 
-const CarouselContainer = () => {
-    return (
-             <div className="Carousel">
-                 
-                 <Carousel>
-                    
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src="https://cdn.jsdelivr.net/gh/persano/BannersWebMaximus/top-under-header/mejores-precios-main-top.webp"
-                            alt="First slide"
-                        />
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src={about}
-                            alt="Second slide"
-                        />
-                    </Carousel.Item>
-
-                 </Carousel>
-                 
-             </div>
-            )
-}
-
-
+const CarouselContainer = () => (
+    <div className="Carousel">
+        <Carousel>
+            {[about, precio].map((src, index) => (
+                <Carousel.Item key={index}>
+                    <img className="d-block w-100" src={src} alt={`Slide ${index + 1}`} />
+                </Carousel.Item>
+            ))}
+        </Carousel>
+    </div>
+);
 
 export default CarouselContainer;
