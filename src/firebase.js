@@ -1,7 +1,6 @@
 // @ts-nocheck
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import 'firebase/compat/messaging';
 
 const firebaseConfig = {
     apiKey: "AIzaSyC0bybZAeVm3y4jeAZ0vOtwtznShywb3NQ",

@@ -12,9 +12,8 @@ import { fabClasses } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
 import { Link } from 'react-router-dom';
-import LazyImage from './LazyImage'; // Importa tu componente LazyImage aquí
-
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import LazyLoad from 'react-lazyload'; 
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,9 +27,10 @@ const ExpandMore = styled((props) => {
 }));
 
 const CardWrapper = styled(Card)(({ theme }) => ({
-  maxWidth: 350,
+  maxWidth: 420, 
+  maxHeight: 900, 
   backgroundColor: '#eeeeee',
-  height: '100%', // Establecer una altura fija para todas las tarjetas
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
 }));
@@ -58,7 +58,12 @@ export default function Product({
         subheader={stock > 0 ? 'Stock disponible: ' + stock : 'Sin Stock'}
       />
 
-      <LazyImage src={image_path} alt="imagen" />
+      {/* Utiliza LazyLoad para cargar las imágenes de manera diferida */}
+      <LazyLoad height={200}>
+        <div style={{ width: '100%', height: '400px', overflow: 'hidden' }}>
+          <img src={image_path} alt="imagen" style={{ width: '100%', height: 'auto' }} />
+        </div>
+      </LazyLoad>
 
       <CardContent>
         <Typography variant="body2" color="text.secondary">

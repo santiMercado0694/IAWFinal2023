@@ -30,7 +30,7 @@
 .pagination {
       display: inline-block;
 }
-    
+
 .pagination a {
       color: black;
       float: left;
@@ -40,7 +40,7 @@
       border: 1px solid #ddd;
       margin: 0 4px;
 }
-    
+
 .pagination a.active {
       background-color: #4CAF50;
       color: white;
@@ -50,7 +50,7 @@
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 .Carousel{
-           object-fit: cover;
-           object-position: center;
-           overflow: hidden;
+      object-fit: cover;
+      object-position: center;
+      overflow: hidden;
 }

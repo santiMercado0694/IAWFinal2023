@@ -124,7 +124,7 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
           />
           <ButtonWrapper>
             {isReadyForInstall && <Button variant="contained" color="primary" onClick={downloadApp}>
-              Descargar
+              Descargar App
             </Button>}
           </ButtonWrapper>
         </Toolbar>

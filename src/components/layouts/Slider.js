@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
-import gamer1 from '../../assets/Gamer1.webp';
-import placa from '../../assets/placa.webp';
-import silla from '../../assets/silla.webp';
 import pc from '../../assets/armadas.webp';
-import notebooks from '../../assets/notebooks.webp';
 
 const CarouselContainer = () => {
     useEffect(() => {
         const preloadImages = async () => {
-            await Promise.all([gamer1, placa, silla, pc, notebooks].map(async (imageSrc) => {
+            await Promise.all([pc].map(async (imageSrc) => {
                 const img = new Image();
                 img.src = imageSrc;
                 await img.decode();
@@ -20,10 +16,15 @@ const CarouselContainer = () => {
 
     return (
         <div className="Carousel">
-            <Carousel>
-                {[gamer1, placa, silla, notebooks, pc].map((src, index) => (
+            <Carousel prevIcon={null} nextIcon={null}
+                touch={false} 
+                keyboard={false} 
+                slide={false} 
+                indicators={false} 
+            >
+                {[pc].map((src, index) => (
                     <Carousel.Item key={index}>
-                        <img className="d-block w-100" src={src} alt={`Slide ${index + 1}`} loading="lazy" />
+                        <img className="d-block w-100" src={src} alt={`Slide ${index + 1}`} />
                     </Carousel.Item>
                 ))}
             </Carousel>
