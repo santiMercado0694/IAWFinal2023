@@ -20,7 +20,7 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: '#000',
+  color: '#555',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 6),
     transition: theme.transitions.create('width'),
@@ -48,7 +48,7 @@ const CustomSearchIcon = styled(SearchIcon)({
 });
 
 const ButtonWrapper = styled('div')(({ theme }) => ({
-  marginLeft: 'auto', // Esto mueve el botón hacia la derecha
+  marginLeft: 'auto', 
 }));
 
 export default function PrimarySearchAppBar({ onDownload, setSearch, categories, getProductsByCategory }) {
@@ -91,8 +91,12 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
     option: (styles, { isDisabled }) => ({
       ...styles,
       backgroundColor: isDisabled ? 'red' : 'white',
-      color: '#00000f',
+      color: '#555',
       cursor: isDisabled ? 'not-allowed' : 'default',
+    }),
+    placeholder: (styles) => ({
+      ...styles,
+      color: '#555', // Color del texto del placeholder
     }),
   };
 
