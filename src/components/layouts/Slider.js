@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import gamer1 from '../../assets/Gamer1.webp';
-//import gamer2 from '../../assets/Gamer2.webp';
 import placa from '../../assets/placa.webp';
 import silla from '../../assets/silla.webp';
 import pc from '../../assets/armadas.webp';
