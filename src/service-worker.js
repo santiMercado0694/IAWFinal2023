@@ -4,9 +4,7 @@ import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 import { StaleWhileRevalidate } from "workbox-strategies";
-
-// Agregar el SDK de OneSignal
-importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
+import OneSignal from 'react-onesignal';
 
 clientsClaim();
 
@@ -58,7 +56,6 @@ self.addEventListener("message", (event) => {
 });
 
 // Configurar OneSignal con tu ID de aplicación
-var OneSignal = self.OneSignal || [];
 OneSignal.push(function() {
   // @ts-ignore
   OneSignal.init({
