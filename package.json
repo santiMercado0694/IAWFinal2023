@@ -61,5 +61,11 @@
   "devDependencies": {
     "@firebase/messaging": "^0.12.6",
     "terser": "^5.28.1"
+  },
+  "overrides": {
+    "react-lazyload": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
   }
 }
