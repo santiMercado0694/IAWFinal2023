@@ -28,7 +28,7 @@ const ExpandMore = styled((props) => {
 
 const CardWrapper = styled(Card)(({ theme }) => ({
   maxWidth: 420, 
-  maxHeight: 900, 
+  maxHeight: 1200, 
   backgroundColor: '#eeeeee',
   height: '100%',
   display: 'flex',

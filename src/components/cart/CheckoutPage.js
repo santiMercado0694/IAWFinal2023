@@ -3,7 +3,6 @@ import { Box, Grid, Typography, Button } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useGlobalContext } from '../../storeContext';
 import Loading from '../layouts/Loading';
-import CarouselCart from "../layouts/SliderCart";
 import CheckoutCard from "./CheckoutCard";
 import Total from "./Total";
 
@@ -28,7 +27,6 @@ const CheckoutPage = () => {
   if (cart.length > 0) {
     return (
       <Box>
-        <CarouselCart />
         <Box sx={{ flexGrow: 1, padding: "2rem" }}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -43,7 +41,6 @@ const CheckoutPage = () => {
   } else {
     return (
       <Box>
-        <CarouselCart />
         <Box sx={{ flexGrow: 1, padding: "2rem" }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
