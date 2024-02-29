@@ -1,7 +1,7 @@
 {
   "background_color": "#ffffff",
   "categories": ["shopping", "entertaiment"],
-  "description": "Esta es una PWA para nuestra tienda de Bahia Computacion",
+  "description": "App de nuestra tienda Bahia Computacion",
   "dir": "ltr",
   "display_override": ["standalone", "fullscreen"],
   "display": "standalone",
@@ -681,11 +681,11 @@
   ],
   "id":"/v1",
   "lang": "es-MX",
-  "name": "PWA Bahia Computacion",
+  "name": "Bahia Computacion",
   "orientation": "portrait",
   "prefer_related_application": false,
   "scope": "/",
-  "short_name": "PWA BHC",
+  "short_name": "Bahia Computacion",
   "start_url":"/",
   "theme_color": "orange",
   "screenshots": [
