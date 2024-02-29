@@ -123,7 +123,7 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
             options={[{ label: 'Todos los productos', value: 'all' }, ...categories.map(cat => ({ label: cat.nombre, value: cat.id }))] }
             onChange={handleFilter}
             className="mb-0"
-            placeholder="Filtrar producto por categoría"
+            placeholder="Categorias"
             isSearchable={false}
           />
           <ButtonWrapper>
