@@ -13,7 +13,6 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
 import { Link } from 'react-router-dom';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import prueba from '../../assets/prueba.webp';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
