@@ -5,7 +5,6 @@ import Product from './Product';
 import { useGlobalContext } from '../../storeContext';
 import Loading from '../layouts/Loading';
 import Pagination from "../layouts/Pagination";
-import Carousel from "../layouts/Slider";
 import { useStateValue } from "../../StateProvider";
 import Search from "../layouts/SearchBar";
 
@@ -27,7 +26,6 @@ export default function ProductContainer() {
 
   return (
     <Box>
-      <Carousel />
       <Search setSearch={setSearch} categories={categories} getProductsByCategory={getProductsByCategory} />
       <Box sx={{ flexGrow: 1, padding: theme.spacing(2) }}>
         <Grid container spacing={2}>

@@ -13,6 +13,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import accounting from 'accounting';
 import { Link } from 'react-router-dom';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import prueba from '../../assets/prueba.webp';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -44,6 +45,8 @@ export default function Product({
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
+  const imageUrl = require('../../assets/desktop/'+ image_path); 
 
   return (
     <CardWrapper>
@@ -57,10 +60,16 @@ export default function Product({
         subheader={stock > 0 ? 'Stock disponible: ' + stock : 'Sin Stock'}
       />
 
-      {/* Utiliza LazyLoad para cargar las imágenes de manera diferida */}
-        <div style={{ width: '100%', height: '400px', overflow: 'hidden' }}>
-          <img src={image_path} alt="imagen" style={{ width: '100%', height: 'auto' }} />
-        </div>
+      <div style={{ 
+        display: 'flex',
+        justifyContent: 'center', // Centrar horizontalmente
+        alignItems: 'center', // Centrar verticalmente
+        width: '100%', 
+        height: '400px', 
+        overflow: 'hidden' 
+      }}>
+        <img src={imageUrl} alt="imagen" style={{ maxWidth: '100%', height: 'auto' }} loading="lazy" />
+      </div>
       
 
       <CardContent>
