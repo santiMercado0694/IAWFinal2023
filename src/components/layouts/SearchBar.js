@@ -115,7 +115,6 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
             />
           </Search>
 
-          <label htmlFor="category-select" style={{ marginRight: '8px' }}>Buscar por categoria:</label>
           <Select
             id="category-select"
             aria-label="Seleccionar categoría"
