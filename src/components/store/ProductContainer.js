@@ -6,7 +6,7 @@ import { useGlobalContext } from '../../storeContext';
 import Loading from '../layouts/Loading';
 import Pagination from "../layouts/Pagination";
 import { useStateValue } from "../../StateProvider";
-import Search from "../layouts/SearchBar";
+import SearchBar from "../layouts/SearchBar";
 
 export default function ProductContainer() {
   const theme = createTheme();
@@ -20,13 +20,15 @@ export default function ProductContainer() {
   const currentPosts = productos.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+  const setPaginationPage = page => setCurrentPage(page);
+
   if (loading) {
     return <Loading />;
   }
 
   return (
     <Box>
-      <Search setSearch={setSearch} categories={categories} getProductsByCategory={getProductsByCategory} />
+      <SearchBar setSearch={setSearch} categories={categories} getProductsByCategory={getProductsByCategory} setPaginationPage={setPaginationPage} />
       <Box sx={{ flexGrow: 1, padding: theme.spacing(2) }}>
         <Grid container spacing={2}>
           {search.length === 0 ? (

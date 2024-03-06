@@ -12,7 +12,7 @@ const Search = styled('div')(({ theme }) => ({
   backgroundColor: 'white',
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
+  width: '50%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto',
@@ -24,9 +24,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 6),
     transition: theme.transitions.create('width'),
-    width: '75%',
+    width: '100%', // Ajusta el ancho a 100%
     [theme.breakpoints.up('md')]: {
-      width: '16ch',
+      width: '50%', // Ancho predeterminado para pantallas más grandes
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '70%', // Reducción del ancho para pantallas medianas
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '90%', // Reducción del ancho para dispositivos extra pequeños (XS)
     },
   },
 }));
@@ -51,7 +57,7 @@ const ButtonWrapper = styled('div')(({ theme }) => ({
   marginLeft: 'auto', 
 }));
 
-export default function PrimarySearchAppBar({ onDownload, setSearch, categories, getProductsByCategory }) {
+export default function PrimarySearchAppBar({ onDownload, setSearch, categories, getProductsByCategory, setPaginationPage }) {
 
   const [isReadyForInstall, setIsReadyForInstall] = useState(false);
 
@@ -84,7 +90,10 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
     setIsReadyForInstall(false);
   };
 
-  const handleFilter = ({ value }) => getProductsByCategory(value);
+  const handleFilter = ({ value }) => {
+    getProductsByCategory(value);
+    setPaginationPage(1); // Reinicia la página a 1 cuando se aplica un filtro
+  };
 
   const colourStyles = {
     control: styles => ({ ...styles, backgroundColor: 'white' }),
