@@ -24,9 +24,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 6),
     transition: theme.transitions.create('width'),
-    width: '100%',
+    width: '75%',
     [theme.breakpoints.up('md')]: {
-      width: '20ch',
+      width: '16ch',
     },
   },
 }));
