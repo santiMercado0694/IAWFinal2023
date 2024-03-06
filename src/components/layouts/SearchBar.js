@@ -24,15 +24,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 6),
     transition: theme.transitions.create('width'),
-    width: '100%', // Ajusta el ancho a 100%
+    width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '50%', // Ancho predeterminado para pantallas más grandes
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '70%', // Reducción del ancho para pantallas medianas
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: '90%', // Reducción del ancho para dispositivos extra pequeños (XS)
+      width: '16ch',
     },
   },
 }));
