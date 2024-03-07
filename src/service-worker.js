@@ -2,14 +2,19 @@
 import { clientsClaim } from "workbox-core";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate, CacheFirst } from "workbox-strategies";
+import { StaleWhileRevalidate, NetworkFirst } from "workbox-strategies"; // Cambiado a NetworkFirst
+import { ExpirationPlugin } from "workbox-expiration";
 import OneSignal from 'react-onesignal';
 
 clientsClaim();
 
+// Precarga y enruta los recursos definidos en __WB_MANIFEST
 precacheAndRoute(self.__WB_MANIFEST);
 
+// Expresión regular para verificar la extensión de los archivos
 const fileExtensionRegexp = new RegExp("/[^/?]+\\.[^/]+$");
+
+// Ruta de registro para manejar las solicitudes de navegación
 registerRoute(
   ({ request, url }) => {
     if (request.mode !== "navigate") {
@@ -26,20 +31,22 @@ registerRoute(
   createHandlerBoundToURL(process.env.PUBLIC_URL + "/index.html")
 );
 
+// Ruta de registro para manejar las solicitudes de imágenes en formato WebP
 registerRoute(
   ({ url }) =>
     url.origin === self.location.origin && url.pathname.endsWith(".webp"),
-  new CacheFirst({
+  new NetworkFirst({ // Cambiado a NetworkFirst
     cacheName: "images",
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 días
       }),
     ],
   })
 );
 
+// Evento de mensaje para omitir la espera de la activación
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
@@ -54,6 +61,7 @@ OneSignal.push(function() {
   });
 });
 
+// Manejar las notificaciones push
 self.addEventListener('push', function(event) {
   console.log('Push notification received', event);
 
