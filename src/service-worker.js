@@ -3,7 +3,7 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { CacheFirst, StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
 
 clientsClaim();
 
@@ -47,7 +47,7 @@ const productosCacheName = 'productos-cache-v1';
 // Ruta para manejar la caché de los datos de productos
 registerRoute(
   ({ url }) => url.origin === 'https://iaw-final2023-api.vercel.app' && url.pathname.startsWith('/products'),
-  new CacheFirst({
+  new NetworkFirst({
     cacheName: productosCacheName,
     plugins: [
       new ExpirationPlugin({
