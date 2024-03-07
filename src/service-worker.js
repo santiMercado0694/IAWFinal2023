@@ -1,17 +1,9 @@
 /* eslint-disable no-restricted-globals */
-
-// This service worker can be customized!
-// See https://developers.google.com/web/tools/workbox/modules
-// for the list of available Workbox modules, or add any other
-// code you'd like.
-// You can also remove this file if you'd prefer not to use a
-// service worker, and the Workbox build step will be skipped.
-
 import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 clientsClaim();
 
@@ -26,7 +18,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 // https://developers.google.com/web/fundamentals/architecture/app-shell
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
-  // Return false to exempt requests from being fulfilled by index.html.
+  // Return false to exempt requests from being fulfilled by App.js.
   ({ request, url }) => {
     // If this isn't a navigation, skip.
     if (request.mode !== 'navigate') {
@@ -43,20 +35,74 @@ registerRoute(
 
     return true;
   },
-  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
+  async ({ request }) => {
+    // Return the response for App.js for all navigation requests.
+    return caches.match('/src/App.js');
+  }
 );
 
-// An example runtime caching route for requests that aren't handled by the
-// precache, in this case same-origin .png requests like those from in public/
+// Define el nombre de la caché para los productos
+const productosCacheName = 'productos-cache-v1';
+
+// Ruta para manejar la caché de los datos de productos
 registerRoute(
-  // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.webp'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  ({ url }) => url.origin === 'https://iaw-final2023-api.vercel.app' && url.pathname.startsWith('/products'),
+  new CacheFirst({
+    cacheName: productosCacheName,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+      }),
+    ],
+  })
+);
+
+
+// Define el nombre de la caché para las categorías
+const categoriasCacheName = 'categorias-cache-v1';
+
+// Ruta para manejar la caché de los datos de categorías JSON
+registerRoute(
+  ({ url }) => url.origin === 'https://iaw-final2023-api.vercel.app' && url.pathname.startsWith('/categories/'),
+  new CacheFirst({
+    cacheName: categoriasCacheName,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+      }),
+    ],
+  })
+);
+
+// Define el nombre de la caché para las categorías por ID
+const categoriasPorIDCacheName = 'categorias-por-id-cache-v1';
+
+// Ruta para manejar la caché de los datos de categorías por ID
+registerRoute(
+  ({ url }) => url.origin === 'https://iaw-final2023-api.vercel.app' && /\/categories\/\d+/.test(url.pathname),
+  new CacheFirst({
+    cacheName: categoriasPorIDCacheName,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+      }),
+    ],
+  })
+);
+
+// Add in any other file extensions or routing criteria as needed.
+registerRoute(
+  ({ url }) => url.origin === self.location.origin && (url.pathname.endsWith('.webp') || url.pathname.endsWith('.png')),
   new StaleWhileRevalidate({
     cacheName: 'images',
     plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used images are removed.
-      new ExpirationPlugin({ maxEntries: 50 }),
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+      }),
     ],
   })
 );
