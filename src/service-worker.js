@@ -17,41 +17,6 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 const fileExtensionRegexp = new RegExp("/[^/?]+\\.[^/]+$");
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open('my-cache-v1').then(cache => {
-      return cache.addAll([
-        // Agrega aquí los recursos que deseas almacenar en caché manualmente
-        '/src/assets/desktop/AuricularesRedragon.webp',
-        '/src/assets/desktop/CamaraCanon.webp',
-        '/src/assets/desktop/CamaraCanon.webp',
-        '/src/assets/desktop/DellVostro.webp',
-        '/src/assets/desktop/HuaweiP30Pro.webp',
-        '/src/assets/desktop/iPhone12Pro.webp',
-        '/src/assets/desktop/Macbook.webp',
-        '/src/assets/desktop/Nintendo64.webp',
-        '/src/assets/desktop/NintendoSwitch.webp',
-        '/src/assets/desktop/NintendoWii.webp',
-        '/src/assets/desktop/NotebookHP15.webp',
-        '/src/assets/desktop/PC1.webp',
-        '/src/assets/desktop/PC2.webp',
-        '/src/assets/desktop/PC3.webp',
-        '/src/assets/desktop/Playstation4.webp',
-        '/src/assets/desktop/Playstation5.webp',
-        '/src/assets/desktop/RTX3090.webp',
-        '/src/assets/desktop/SuperNintendo.webp',
-        '/src/assets/desktop/XboxSeriesX.webp',
-        '/src/assets/NombreTienda.webp',
-        '/src/assets/Signin.webp',
-        '/public/index.html',
-        '/src/App.css',
-        '/src/App.js',
-        '/src/index.css'
-      ]);
-    })
-  );
-});
-
 registerRoute(
   // Return false to exempt requests from being fulfilled by index.html.
   ({ request, url }) => {
