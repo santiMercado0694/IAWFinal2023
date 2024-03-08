@@ -18,7 +18,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 // https://developers.google.com/web/fundamentals/architecture/app-shell
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
-  // Return false to exempt requests from being fulfilled by App.js.
+  // Return false to exempt requests from being fulfilled by index.html.
   ({ request, url }) => {
     // If this isn't a navigation, skip.
     if (request.mode !== 'navigate') {
@@ -35,10 +35,7 @@ registerRoute(
 
     return true;
   },
-  async ({ request }) => {
-    // Return the response for App.js for all navigation requests.
-    return caches.match('/src/App.js');
-  }
+  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );
 
 // Define el nombre de la caché para los productos
@@ -81,17 +78,22 @@ const categoriasPorIDCacheName = 'categorias-por-id-cache-v1';
 
 // Ruta para manejar la caché de los datos de categorías por ID
 registerRoute(
-  ({ url }) => url.origin === 'https://iaw-final2023-api.vercel.app' && /\/categories\/\d+/.test(url.pathname),
+  ({ url }) => {
+    // Verificar si la URL coincide con el patrón deseado
+    return url.origin === 'https://iaw-final2023-api.vercel.app' && url.pathname.startsWith('/products/category/') && /[1-7]$/.test(url.pathname);
+  },
   new CacheFirst({
     cacheName: categoriasPorIDCacheName,
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 días
       }),
     ],
   })
 );
+
+
 
 // Add in any other file extensions or routing criteria as needed.
 registerRoute(
