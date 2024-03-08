@@ -90,11 +90,10 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
   };
 
   const handleFilter = ({ value }) => {
-    if (value === 'all') {
-      setSearch(""); // Reiniciar la barra de búsqueda cuando se selecciona "Todos los productos"
-    }
-    getProductsByCategory(value);
     setPaginationPage(1); // Reinicia la página a 1 cuando se aplica un filtro
+    getProductsByCategory(value);
+    setSearchInput("");
+    setSearch("");
   };
 
   const colourStyles = {
