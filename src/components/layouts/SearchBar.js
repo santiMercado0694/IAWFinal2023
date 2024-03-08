@@ -52,8 +52,8 @@ const ButtonWrapper = styled('div')(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar({ onDownload, setSearch, categories, getProductsByCategory, setPaginationPage }) {
-
   const [isReadyForInstall, setIsReadyForInstall] = useState(false);
+  const [searchInput, setSearchInput] = useState(''); // Estado para el filtro de búsqueda
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event) => {
@@ -84,7 +84,15 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
     setIsReadyForInstall(false);
   };
 
+  const handleSearchInputChange = (e) => {
+    setSearchInput(e.target.value);
+    setSearch(e.target.value); // Actualizar el filtro de búsqueda
+  };
+
   const handleFilter = ({ value }) => {
+    if (value === 'all') {
+      setSearch(""); // Reiniciar la barra de búsqueda cuando se selecciona "Todos los productos"
+    }
     getProductsByCategory(value);
     setPaginationPage(1); // Reinicia la página a 1 cuando se aplica un filtro
   };
@@ -114,7 +122,8 @@ export default function PrimarySearchAppBar({ onDownload, setSearch, categories,
             <StyledInputBase
               placeholder="Buscar productos"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchInput} // Usar el valor del estado de búsqueda
+              onChange={handleSearchInputChange} // Manejar cambios en el estado de búsqueda
             />
           </Search>
 

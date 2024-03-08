@@ -94,7 +94,6 @@ registerRoute(
 );
 
 
-
 // Add in any other file extensions or routing criteria as needed.
 registerRoute(
   ({ url }) => url.origin === self.location.origin && (url.pathname.endsWith('.webp') || url.pathname.endsWith('.png')),
