@@ -11,6 +11,7 @@ clientsClaim();
 // Their URLs are injected into the manifest variable below.
 // This variable must be present somewhere in your service worker file,
 // even if you decide not to use precaching. See https://cra.link/PWA
+// @ts-ignore
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Set up App Shell-style routing, so that all navigation requests
@@ -49,17 +50,16 @@ registerRoute(
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 dias
       }),
     ],
   })
 );
 
-
 // Define el nombre de la caché para las categorías
 const categoriasCacheName = 'categorias-cache-v1';
 
-// Ruta para manejar la caché de los datos de categorías JSON
+// Ruta para manejar la caché de los datos de categorías
 registerRoute(
   ({ url }) => url.origin === 'https://iaw-final2023-api.vercel.app' && url.pathname.startsWith('/categories/'),
   new CacheFirst({
@@ -67,42 +67,21 @@ registerRoute(
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 dias
       }),
     ],
   })
 );
-
-// Define el nombre de la caché para las categorías por ID
-const categoriasPorIDCacheName = 'categorias-por-id-cache-v1';
-
-// Ruta para manejar la caché de los datos de categorías por ID
-registerRoute(
-  ({ url }) => {
-    // Verificar si la URL coincide con el patrón deseado
-    return url.origin === 'https://iaw-final2023-api.vercel.app' && url.pathname.startsWith('/products/category/') && /[1-7]$/.test(url.pathname);
-  },
-  new CacheFirst({
-    cacheName: categoriasPorIDCacheName,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 días
-      }),
-    ],
-  })
-);
-
 
 // Add in any other file extensions or routing criteria as needed.
 registerRoute(
-  ({ url }) => url.origin === self.location.origin && (url.pathname.endsWith('.webp') || url.pathname.endsWith('.png')),
-  new StaleWhileRevalidate({
+  ({ url }) => url.origin === self.location.origin && (url.pathname.endsWith('.webp') || url.pathname.endsWith('.png') || url.pathname.endsWith('.ico') ),
+  new CacheFirst({
     cacheName: 'images',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 dias
       }),
     ],
   })
@@ -112,8 +91,7 @@ registerRoute(
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
+    // @ts-ignore
     self.skipWaiting();
   }
 });
-
-// Any other custom service worker logic can go here.
