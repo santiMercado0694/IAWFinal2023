@@ -18,10 +18,22 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [{ user }, dispatch] = useStateValue();
   const [hasDisplayedToast, setHasDisplayedToast] = useState(false);
+  const [initialized, setInitialized] = useState(false);
+  
 
   useEffect(() => {
-    OneSignal.init({ appId: 'cbb828bb-a3d0-4d28-b9b8-7093d3efeae6' });
+    OneSignal.init({
+      appId: 'cbb828bb-a3d0-4d28-b9b8-7093d3efeae6',
+      serviceWorkerParam: { scope: '/onesignal' },
+      serviceWorkerPath: 'src/push/onesignal/OneSignalSDKWorker.js'
+    }).then(() => {
+      setInitialized(true);
+      OneSignal.showSlidedownPrompt();
+    }).catch(error => {
+      console.error('Error initializing OneSignal:', error);
+    });
   }, []);
+   
 
   useEffect(() => {
     const eventListener = (event) => {
