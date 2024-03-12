@@ -1,6 +1,6 @@
 importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
-self.addEventListener('push', function(event) {
+/*self.addEventListener('push', function(event) {
     console.log('Push notification received', event);
   
     var title = 'Push notification';
@@ -13,4 +13,4 @@ self.addEventListener('push', function(event) {
   
     // @ts-ignore
     event.waitUntil(self.registration.showNotification(title, options));
-  });
+  });*/

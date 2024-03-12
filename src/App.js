@@ -22,9 +22,7 @@ function App() {
   
   useEffect(() => {
     OneSignal.init({
-      appId: '28d698a7-ed50-41ce-bf3d-0116d96f44e4',
-      serviceWorkerParam: { scope: "/push/onesignal/" },
-      serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js"
+      appId: '28d698a7-ed50-41ce-bf3d-0116d96f44e4'
     }).then(() => {
       setInitialized(true);
       OneSignal.Slidedown.promptPush();
