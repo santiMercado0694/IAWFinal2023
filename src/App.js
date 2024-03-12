@@ -20,20 +20,18 @@ function App() {
   const [hasDisplayedToast, setHasDisplayedToast] = useState(false);
   const [initialized, setInitialized] = useState(false);
   
-
   useEffect(() => {
     OneSignal.init({
-      appId: 'cbb828bb-a3d0-4d28-b9b8-7093d3efeae6',
-      serviceWorkerParam: { scope: '/onesignal' },
-      serviceWorkerPath: 'src/push/onesignal/OneSignalSDKWorker.js'
+      appId: '28d698a7-ed50-41ce-bf3d-0116d96f44e4',
+      serviceWorkerParam: { scope: "/push/onesignal/" },
+      serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js"
     }).then(() => {
       setInitialized(true);
-      OneSignal.showSlidedownPrompt();
+      OneSignal.Slidedown.promptPush();
     }).catch(error => {
       console.error('Error initializing OneSignal:', error);
     });
   }, []);
-
 
   useEffect(() => {
     const eventListener = (event) => {
