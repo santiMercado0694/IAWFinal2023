@@ -33,7 +33,7 @@ function App() {
       console.error('Error initializing OneSignal:', error);
     });
   }, []);
-   
+
 
   useEffect(() => {
     const eventListener = (event) => {
