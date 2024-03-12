@@ -10,25 +10,30 @@ import Signup from './components/user/Signup';
 import Checkout from './components/cart/Checkout';
 import { actionTypes } from './reducer';
 import { useStateValue } from './StateProvider';
-import { auth } from './firebase';
-import OneSignal from 'react-onesignal';
+import { auth, messaging, getTokenAlpha   } from './firebase';
+import { register } from './firebaseServiceWorker';
+//import OneSignal from 'react-onesignal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as PusherPushNotifications from "@pusher/push-notifications-web";
+
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
   const [hasDisplayedToast, setHasDisplayedToast] = useState(false);
   const [initialized, setInitialized] = useState(false);
+  const [isTokenFound, setTokenFound] = useState(false);
+  
   
 
-  useEffect(() => {
+  /*useEffect(() => {
     OneSignal.init({
-      appId: 'cbb828bb-a3d0-4d28-b9b8-7093d3efeae6',
+      appId: '28d698a7-ed50-41ce-bf3d-0116d96f44e4', allowLocalhostAsSecureOrigin: true,
       serviceWorkerParam: { scope: '/onesignal' },
-      serviceWorkerPath: 'src/push/onesignal/OneSignalSDKWorker.js'
+      serviceWorkerPath: '/push/onesignal/OneSignalSDKWorker.js'
     }).then(() => {
       setInitialized(true);
-      OneSignal.showSlidedownPrompt();
+      OneSignal.Slidedown.promptPush();
     }).catch(error => {
       console.error('Error initializing OneSignal:', error);
     });
@@ -55,19 +60,20 @@ function App() {
     return () => {
       OneSignal.Notifications.removeEventListener('foregroundWillDisplay', eventListener);
     };
-  }, [hasDisplayedToast]);
+  }, [hasDisplayedToast]);*/
 
   useEffect(() => {
-    // Verificar si hay datos en caché al cargar la aplicación
-    const cachedData = localStorage.getItem('cachedData');
-    if (cachedData) {
-      // Si hay datos en caché, actualizar el estado con los datos
-      dispatch({
-        type: actionTypes.SET_CACHED_DATA,
-        cachedData: JSON.parse(cachedData),
-      });
+    
+    getTokenAlpha(setTokenFound);
+
+    // inside the jsx being returned:
+    {isTokenFound && 
+      console.log("Notification permission enabled 👍🏻")
     }
-  }, [dispatch]);
+    {!isTokenFound && 
+      console.log("Need notification permission ❗️ ")
+    }
+}, []);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
