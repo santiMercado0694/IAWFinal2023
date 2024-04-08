@@ -4,6 +4,7 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst, NetworkFirst } from 'workbox-strategies';
+import OneSignal from 'react-onesignal';
 
 clientsClaim();
 
@@ -38,6 +39,8 @@ registerRoute(
   },
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );
+
+/*
 
 // Define el nombre de la caché para los productos
 const productosCacheName = 'productos-cache-v1';
@@ -87,6 +90,8 @@ registerRoute(
   })
 );
 
+*/
+
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
@@ -94,4 +99,28 @@ self.addEventListener('message', (event) => {
     // @ts-ignore
     self.skipWaiting();
   }
+});
+
+// Configurar OneSignal con tu ID de aplicación
+// @ts-ignore
+OneSignal.push(function() {
+  // @ts-ignore
+  OneSignal.init({
+    appId: "cbb828bb-a3d0-4d28-b9b8-7093d3efeae6",
+  });
+});
+
+self.addEventListener('push', function(event) {
+  console.log('Push notification received', event);
+
+  var title = 'Push notification';
+  var options = {
+    // @ts-ignore
+    body: event.data.text(),
+    icon: '/icon.png',
+    badge: '/badge.png'
+  };
+
+  // @ts-ignore
+  event.waitUntil(self.registration.showNotification(title, options));
 });
