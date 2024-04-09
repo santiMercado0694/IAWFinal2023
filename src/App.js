@@ -20,7 +20,8 @@ function App() {
   const [hasDisplayedToast, setHasDisplayedToast] = useState(false);
 
   useEffect(() => {
-    OneSignal.init({ appId: 'cbb828bb-a3d0-4d28-b9b8-7093d3efeae6' });
+    const onesignalAppId = process.env.REACT_APP_ONESIGNAL_APP_ID;
+    OneSignal.init({ appId: onesignalAppId });
   }, []);
 
   useEffect(() => {
@@ -44,18 +45,6 @@ function App() {
       OneSignal.Notifications.removeEventListener('foregroundWillDisplay', eventListener);
     };
   }, [hasDisplayedToast]);
-
-  useEffect(() => {
-    // Verificar si hay datos en caché al cargar la aplicación
-    const cachedData = localStorage.getItem('cachedData');
-    if (cachedData) {
-      // Si hay datos en caché, actualizar el estado con los datos
-      dispatch({
-        type: actionTypes.SET_CACHED_DATA,
-        cachedData: JSON.parse(cachedData),
-      });
-    }
-  }, [dispatch]);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {

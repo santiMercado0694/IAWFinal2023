@@ -103,10 +103,11 @@ self.addEventListener('message', (event) => {
 
 // Configurar OneSignal con tu ID de aplicación
 // @ts-ignore
+const onesignalAppId = process.env.REACT_APP_ONESIGNAL_APP_ID;
+// @ts-ignore
 OneSignal.push(function() {
-  // @ts-ignore
   OneSignal.init({
-    appId: "cbb828bb-a3d0-4d28-b9b8-7093d3efeae6",
+    appId: onesignalAppId,
   });
 });
 
